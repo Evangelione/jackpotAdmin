@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, DatePicker, Upload, Button, Icon, Switch, message } from 'antd';
 import { formItemLayout } from '@/common/constant';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
 import { api } from '@/common/constant';
 
@@ -107,6 +108,10 @@ class PageSetting extends Component {
   };
 
   render() {
+    const formatedText = formatMessage({
+      id: 'index.bread.index',
+    });
+    console.log(formatedText);
     const { getFieldDecorator } = this.props.form;
     const { uploading } = this.state;
     const props = {
@@ -118,14 +123,16 @@ class PageSetting extends Component {
     return (
       <Form {...formItemLayout}>
         <Form.Item
-          label='标题'
+          label={<FormattedMessage id="setting.navBar.pageSetup.title"/>}
         >
           {getFieldDecorator('title', strConfig)(
-            <Input/>,
+            <Input placeholder={formatMessage({
+              id: 'setting.navBar.pageSetup.title.placeHolder',
+            })}/>,
           )}
         </Form.Item>
         <Form.Item
-          label='KV横幅'
+          label={<FormattedMessage id="setting.navBar.pageSetup.kv"/>}
         >
           {getFieldDecorator('banner')(
             <Upload
@@ -135,94 +142,106 @@ class PageSetting extends Component {
               beforeUpload={this.beforeUpload}
             >
               <Button>
-                <Icon type="upload"/> 上传KV横幅
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='背景图'
+          label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}
         >
           {getFieldDecorator('background')(
             <Upload {...props}>
               <Button>
-                <Icon type="upload"/> 上传背景图
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='广告图'
+          label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}
         >
           {getFieldDecorator('ad')(
             <Upload {...props}>
               <Button>
-                <Icon type="upload"/> 上传广告图
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='开始时间'
+          label={<FormattedMessage id="setting.navBar.pageSetup.start"/>}
         >
           {getFieldDecorator('startTime', timeConfig)(
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
+            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"
+                        placeholder={formatMessage({
+                          id: 'setting.navBar.pageSetup.start.placeHolder',
+                        })}/>,
           )}
         </Form.Item>
         <Form.Item
-          label='结束时间'
+          label={<FormattedMessage id="setting.navBar.pageSetup.end"/>}
         >
           {getFieldDecorator('endTime', timeConfig)(
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
+            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"
+                        placeholder={formatMessage({
+                          id: 'setting.navBar.pageSetup.end.placeHolder',
+                        })}/>,
           )}
         </Form.Item>
         <Form.Item
-          label='活动说明'
+          label={<FormattedMessage id="setting.navBar.pageSetup.eventDesc"/>}
         >
           {getFieldDecorator('description', strConfig)(
-            <TextArea placeholder="Autosize height with minimum and maximum number of lines"
+            <TextArea placeholder={formatMessage({
+              id: 'setting.navBar.pageSetup.eventDesc.placeHolder',
+            })}
                       autosize={{ minRows: 4 }}/>,
           )}
         </Form.Item>
         <Form.Item
-          label='转盘指针'
+          label={<FormattedMessage id="setting.navBar.pageSetup.pointer"/>}
         >
           {getFieldDecorator('pointer')(
             <Upload {...props}>
               <Button>
-                <Icon type="upload"/> 上传转盘指针
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.pointer.btn"/>
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='转盘'
+          label={<FormattedMessage id="setting.navBar.pageSetup.turntable"/>}
         >
           {getFieldDecorator('turntable')(
             <Upload {...props}>
               <Button>
-                <Icon type="upload"/> 上传转盘
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.turntable.btn"/>
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='中奖记录'
+          label={<FormattedMessage id="setting.navBar.pageSetup.award"/>}
         >
           {getFieldDecorator('record')(
             <Switch defaultChecked/>,
           )}
         </Form.Item>
         <Form.Item
-          label='最新中奖名单'
+          label={<FormattedMessage id="setting.navBar.pageSetup.winnersList"/>}
         >
           {getFieldDecorator('newest')(
             <Switch defaultChecked/>,
           )}
         </Form.Item>
         <div style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }}>保存</Button>
-          <Button type='danger' htmlType='reset'>重置</Button>
+          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }}>
+            <FormattedMessage id="setting.navBar.pageSetup.save"/>
+          </Button>
+          <Button type='danger' htmlType='reset'>
+            <FormattedMessage id="setting.navBar.pageSetup.reset"/>
+          </Button>
         </div>
       </Form>
     );

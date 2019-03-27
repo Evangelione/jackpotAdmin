@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs } from 'antd';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import PageSetting from '../components/PageSetting';
 import IMEISetting from '../components/IMEISetting';
 import PrizeSetting from '../components/PrizeSetting';
@@ -30,16 +31,16 @@ class BigWheelSetting extends Component {
     console.log(activityDetail);
     return (
       <Tabs onChange={this.callback} type="card">
-        <TabPane tab="页面设置" key="1">
+        <TabPane tab={<FormattedMessage id="setting.navBar.pageSetup"/>} key="1">
           <PageSetting/>
         </TabPane>
-        <TabPane tab="IMEI设置" key="2">
+        <TabPane tab={<FormattedMessage id="setting.navBar.imeiSetting"/>} key="2">
           <IMEISetting/>
         </TabPane>
-        <TabPane tab="奖品设置" key="3">
+        <TabPane tab={<FormattedMessage id="setting.navBar.prizeSetting"/>} key="3">
           <PrizeSetting/>
         </TabPane>
-        <TabPane tab="概率设置" key="4">
+        <TabPane tab={<FormattedMessage id="setting.navBar.probabilitySetting"/>} key="4">
           <PossibilitySetting/>
         </TabPane>
       </Tabs>

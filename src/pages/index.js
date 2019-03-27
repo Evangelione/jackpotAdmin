@@ -9,15 +9,15 @@ import { connect } from 'dva';
 }))
 class Index extends Component {
   columns = [{
-    title: '活动标题',
+    title: <FormattedMessage id="bigWheel.list.table.title"/>,
     dataIndex: 'title',
     key: 'title',
   }, {
-    title: '活动链接',
+    title: <FormattedMessage id="bigWheel.list.table.activeLink"/>,
     dataIndex: 'age',
     key: 'age',
   }, {
-    title: '活动二维码',
+    title: <FormattedMessage id="bigWheel.list.table.QRCode"/>,
     dataIndex: 'address',
     key: 'address',
     render: () => {
@@ -26,18 +26,18 @@ class Index extends Component {
                   alt=""/>;
     },
   }, {
-    title: '活动时间',
+    title: <FormattedMessage id="bigWheel.list.table.activeDate"/>,
     render: (text, record) => {
       let start = record.createtime.substr(0, 10);
       let end = record.endtime.substr(0, 10);
       return `${start} - ${end}`;
     },
   }, {
-    title: '兑奖链接',
+    title: <FormattedMessage id="bigWheel.list.table.redeemLink"/>,
     dataIndex: 'address3',
     key: 'address3',
   }, {
-    title: '兑奖二维码',
+    title: <FormattedMessage id="bigWheel.list.table.redeemQRCode"/>,
     dataIndex: 'address4',
     key: 'address4',
     render: () => {
@@ -46,17 +46,23 @@ class Index extends Component {
                   alt=""/>;
     },
   }, {
-    title: '活动数据',
+    title: <FormattedMessage id="bigWheel.list.table.activeData"/>,
     render: (text, record) => {
-      return <Button type='primary' onClick={this.goActivityData}>查看详情</Button>;
+      return <Button type='primary' onClick={this.goActivityData}>
+        <FormattedMessage id="bigWheel.list.table.viewDetail"/>
+      </Button>;
     },
   }, {
-    title: '操作',
+    title: <FormattedMessage id="bigWheel.list.table.operating"/>,
     render: (text, record) => {
       return <>
-        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>设置</Button>
+        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>
+          <FormattedMessage id="bigWheel.list.table.setting"/>
+        </Button>
         <br/>
-        <Button type='danger'>删除</Button>
+        <Button type='danger'>
+          <FormattedMessage id="bigWheel.list.table.delete"/>
+        </Button>
       </>;
     },
   }];
@@ -113,7 +119,9 @@ class Index extends Component {
     return (
       <div>
         <div style={{ textAlign: 'right', marginBottom: 20 }}>
-          <Button type='primary' size='large' onClick={this.createActivity}>创建活动</Button>
+          <Button type='primary' size='large' onClick={this.createActivity}>
+            <FormattedMessage id="bigWheel.list.createActive"/>
+          </Button>
         </div>
         <Table columns={this.columns} dataSource={bigWheelList} rowKey='id' pagination={false}/>
         <div style={{ textAlign: 'center', marginTop: 20 }}>

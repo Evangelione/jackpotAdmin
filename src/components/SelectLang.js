@@ -9,14 +9,14 @@ class SelectLang extends PureComponent {
 
   render() {
     const selectedLang = getLocale();
-    const locales = ['zh-CN', 'en-US'];
+    const locales = ['en-US', 'zh-CN'];
     const languageLabels = {
-      'zh-CN': '简体中文',
       'en-US': 'English',
+      'zh-CN': '简体中文',
     };
     const languageIcons = {
-      'zh-CN': '🇨🇳',
       'en-US': '🇬🇧',
+      'zh-CN': '🇨🇳',
     };
     const langMenu = (
       <Menu selectedKeys={[selectedLang]} onClick={this.changeLang}>

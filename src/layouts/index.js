@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { LocaleProvider, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import SelectLang from '../components/SelectLang';
 // import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import router from 'umi/router';
@@ -14,10 +15,11 @@ const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 const BreadcrumbItem = {
-  '/': '大转盘',
-  '/soduku': '九宫格',
-  '/goldenEggs': '砸金蛋',
-  '/administrator': '管理员设置',
+  '/': <FormattedMessage id="index.bread.bigWheel"/>,
+  '/soduku': <FormattedMessage id="index.bread.soduku"/>,
+  '/goldenEggs': <FormattedMessage id="index.bread.eggFrenzy"/>,
+  '/imeiSetting': <FormattedMessage id="index.bread.imei"/>,
+  '/administrator': <FormattedMessage id="index.bread.admin"/>,
 };
 
 @connect(({ global }) => ({
@@ -51,13 +53,25 @@ class BasicLayout extends Component {
                 onClick={this.handleClick}>
             <SubMenu
               key="home"
-              title={<span><Icon type="home"/><span>首页</span></span>}
+              title={<span><Icon type="home"/><span>
+                <FormattedMessage id="index.bread.index"/>
+              </span></span>}
             >
-              <Menu.Item key="/">大转盘</Menu.Item>
-              <Menu.Item key="/soduku">九宫格</Menu.Item>
-              <Menu.Item key="/goldenEggs">砸金蛋</Menu.Item>
-              <Menu.Item key="/imeiSetting">全局IMEI设置</Menu.Item>
-              <Menu.Item key="/administrator">管理员设置</Menu.Item>
+              <Menu.Item key="/">
+                <FormattedMessage id="index.bread.bigWheel"/>
+              </Menu.Item>
+              <Menu.Item key="/soduku">
+                <FormattedMessage id="index.bread.soduku"/>
+              </Menu.Item>
+              <Menu.Item key="/goldenEggs">
+                <FormattedMessage id="index.bread.eggFrenzy"/>
+              </Menu.Item>
+              <Menu.Item key="/imeiSetting">
+                <FormattedMessage id="index.bread.imei"/>
+              </Menu.Item>
+              <Menu.Item key="/administrator">
+                <FormattedMessage id="index.bread.admin"/>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -67,7 +81,9 @@ class BasicLayout extends Component {
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <FormattedMessage id="index.bread.index"/>
+              </Breadcrumb.Item>
               <Breadcrumb.Item>{BreadcrumbItem[pathname]}</Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
