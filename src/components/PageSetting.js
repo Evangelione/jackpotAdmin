@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Input, DatePicker, Upload, Button, Icon, Switch } from 'antd';
+import { Form, Input, DatePicker, Upload, Button, Icon, Switch, message } from 'antd';
 import { formItemLayout } from '@/common/constant';
+import reqwest from 'reqwest';
+import { api } from '@/common/constant';
 
 const { TextArea } = Input;
 const strConfig = {
@@ -20,6 +22,7 @@ class PageSetting extends Component {
       url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
       thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
     }],
+    uploading: false,
   };
 
   changeKV = (info) => {
@@ -59,13 +62,59 @@ class PageSetting extends Component {
     this.setState({ kvFileList: fileList });
   };
 
+  beforeUpload = (file) => {
+    this.setState({
+      kvFileList: [file],
+    });
+    this.handleUpload();
+    return false;
+  };
+
+  handleUpload = () => {
+    const { kvFileList } = this.state;
+    const formData = new FormData();
+    kvFileList.forEach((file) => {
+      formData.append('file', file);
+    });
+
+    this.setState({
+      uploading: true,
+    });
+
+    console.log(formData);
+
+    // You can use any AJAX library you like
+    reqwest({
+      url: `${api}/api/upload`,
+      method: 'post',
+      processData: false,
+      data: formData,
+      success: (resp) => {
+        console.log(resp);
+        this.setState({
+          fileList: [],
+          uploading: false,
+        });
+        message.success(resp.msg);
+      },
+      error: () => {
+        this.setState({
+          uploading: false,
+        });
+        message.error('upload failed.');
+      },
+    });
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { uploading } = this.state;
     const props = {
       action: '//jsonplaceholder.typicode.com/posts/',
       listType: 'picture',
       fileList: [...this.state.kvFileList],
     };
+    console.log(this.state.kvFileList);
     return (
       <Form {...formItemLayout}>
         <Form.Item
@@ -78,8 +127,13 @@ class PageSetting extends Component {
         <Form.Item
           label='KV横幅'
         >
-          {getFieldDecorator('kv')(
-            <Upload {...props} onChange={this.changeKV}>
+          {getFieldDecorator('banner')(
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.kvFileList}
+              beforeUpload={this.beforeUpload}
+            >
               <Button>
                 <Icon type="upload"/> 上传KV横幅
               </Button>
@@ -89,7 +143,7 @@ class PageSetting extends Component {
         <Form.Item
           label='背景图'
         >
-          {getFieldDecorator('bg')(
+          {getFieldDecorator('background')(
             <Upload {...props}>
               <Button>
                 <Icon type="upload"/> 上传背景图
@@ -100,7 +154,7 @@ class PageSetting extends Component {
         <Form.Item
           label='广告图'
         >
-          {getFieldDecorator('banner')(
+          {getFieldDecorator('ad')(
             <Upload {...props}>
               <Button>
                 <Icon type="upload"/> 上传广告图
@@ -111,14 +165,14 @@ class PageSetting extends Component {
         <Form.Item
           label='开始时间'
         >
-          {getFieldDecorator('start', timeConfig)(
+          {getFieldDecorator('startTime', timeConfig)(
             <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
           )}
         </Form.Item>
         <Form.Item
           label='结束时间'
         >
-          {getFieldDecorator('end', timeConfig)(
+          {getFieldDecorator('endTime', timeConfig)(
             <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
           )}
         </Form.Item>
@@ -155,14 +209,14 @@ class PageSetting extends Component {
         <Form.Item
           label='中奖记录'
         >
-          {getFieldDecorator('recording')(
+          {getFieldDecorator('record')(
             <Switch defaultChecked/>,
           )}
         </Form.Item>
         <Form.Item
           label='最新中奖名单'
         >
-          {getFieldDecorator('list')(
+          {getFieldDecorator('newest')(
             <Switch defaultChecked/>,
           )}
         </Form.Item>

@@ -8,3 +8,7 @@ export const formItemLayout = {
     md: { span: 8 },
   },
 };
+
+export const PAGESIZE = 10;
+
+export const api = 'http://118.31.46.146:8000';

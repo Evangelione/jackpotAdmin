@@ -1,36 +1,17 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Pagination } from 'antd';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
+import { connect } from 'dva';
 
+@connect(({ bigWheel }) => ({
+  bigWheel,
+}))
 class Index extends Component {
-  state = {
-    dataSource: [{
-      key: '1',
-      name: '抽奖测试活动',
-      age: 'https://www.baidu.com/id=0098423',
-      address: '西湖区湖底公园1号',
-      address2: '西湖区湖底公园1号',
-      address3: 'https://www.baidu.com/id=0098423',
-      address4: '西湖区湖底公园1号',
-      address5: '西湖区湖底公园1号',
-      address6: '西湖区湖底公园1号',
-    }, {
-      key: '2',
-      name: '抽奖测试活动',
-      age: 'https://www.baidu.com/id=0098423',
-      address: '西湖区湖底公园1号',
-      address2: '西湖区湖底公园1号',
-      address3: 'https://www.baidu.com/id=0098423',
-      address4: '西湖区湖底公园1号',
-      address5: '西湖区湖底公园1号',
-      address6: '西湖区湖底公园1号',
-    }],
-  };
-
   columns = [{
     title: '活动标题',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'title',
+    key: 'title',
   }, {
     title: '活动链接',
     dataIndex: 'age',
@@ -46,8 +27,11 @@ class Index extends Component {
     },
   }, {
     title: '活动时间',
-    dataIndex: 'address2',
-    key: 'address2',
+    render: (text, record) => {
+      let start = record.createtime.substr(0, 10);
+      let end = record.endtime.substr(0, 10);
+      return `${start} - ${end}`;
+    },
   }, {
     title: '兑奖链接',
     dataIndex: 'address3',
@@ -63,52 +47,78 @@ class Index extends Component {
     },
   }, {
     title: '活动数据',
-    dataIndex: 'address5',
-    key: 'address5',
     render: (text, record) => {
-      return <Button type='primary'>查看详情</Button>;
+      return <Button type='primary' onClick={this.goActivityData}>查看详情</Button>;
     },
   }, {
     title: '操作',
-    dataIndex: 'address6',
-    key: 'address6',
     render: (text, record) => {
       return <>
-        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail}>设置</Button>
+        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>设置</Button>
         <br/>
         <Button type='danger'>删除</Button>
       </>;
     },
   }];
-  createActivity = () => {
-    const data = {
-      key: Math.random(),
-      name: '抽奖测试活动',
-      age: 'https://www.baidu.com/id=0098423',
-      address: '西湖区湖底公园1号',
-      address2: '西湖区湖底公园1号',
-      address3: 'https://www.baidu.com/id=0098423',
-      address4: '西湖区湖底公园1号',
-      address5: '西湖区湖底公园1号',
-      address6: '西湖区湖底公园1号',
-    };
-    this.setState({
-      dataSource: [...this.state.dataSource, data],
+
+  goActivityData = () => {
+    router.push({
+      pathname: '/activityData',
+      query: {
+        category: 1,
+      },
     });
   };
 
-  goDetail = () => {
-    router.push('/bigWheelSetting');
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'bigWheel/fetchBigWheelList',
+      payload: {
+        category: 1,
+      },
+    });
+  }
+
+  createActivity = () => {
+    this.props.dispatch({
+      type: 'bigWheel/addActivity',
+      payload: {
+        category: 1,
+      },
+    }).then(() => {
+      this.props.dispatch({
+        type: 'bigWheel/fetchBigWheelList',
+        payload: {
+          category: 1,
+        },
+      });
+    });
+  };
+
+  goDetail = (id) => {
+    router.push({ pathname: '/bigWheelSetting', query: { id } });
+  };
+
+  bigWheelPageChange = (page) => {
+    this.props.dispatch({
+      type: 'bigWheel/fetchBigWheelList',
+      payload: {
+        page,
+      },
+    });
   };
 
   render() {
-    const { dataSource } = this.state;
+    const { bigWheelList, bigWheelPage, bigWheelTotal } = this.props.bigWheel;
     return (
       <div>
         <div style={{ textAlign: 'right', marginBottom: 20 }}>
           <Button type='primary' size='large' onClick={this.createActivity}>创建活动</Button>
         </div>
-        <Table columns={this.columns} dataSource={dataSource}/>
+        <Table columns={this.columns} dataSource={bigWheelList} rowKey='id' pagination={false}/>
+        <div style={{ textAlign: 'center', marginTop: 20 }}>
+          <Pagination current={bigWheelPage} total={bigWheelTotal} onChange={this.bigWheelPageChange}/>
+        </div>
       </div>
     );
   }
