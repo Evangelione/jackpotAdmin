@@ -14,6 +14,10 @@ export default {
     imeiPage: 0,
     imeiTotal: 1,
     activityDetail: [],
+    pageSetupDetail: {},
+    imeiDetail: {},
+    prizeDetail: [],
+    probabilityDetail: {},
   },
 
   subscriptions: {
@@ -72,19 +76,45 @@ export default {
         message.error(data.msg);
     },
     * fetchActivityDetail({ payload: { id } }, { call, put }) {
-      const { data } = yield call(services.fetchActivityDetail, id);
+      const pageSetupDetail = yield call(services.fetchPageSetupDetail, id);
+      const IMeiDetail = yield call(services.fetchIMeiDetail, id);
+      const prizeDetail = yield call(services.fetchprizeDetail, id);
+      const probabilityDetail = yield call(services.fetchprobabilityDetail, id);
 
-      parseInt(data.code, 10) === 1 ?
+      parseInt(probabilityDetail.data.code, 10) === 1 ?
         yield put({
           type: 'save',
           payload: {
-            activityDetail: data.data.list,
+            pageSetupDetail: pageSetupDetail.data.data,
+            imeiDetail: IMeiDetail.data.data,
+            prizeDetail: prizeDetail.data.data,
+            probabilityDetail: probabilityDetail.data.data,
           },
         })
         :
+        message.error(probabilityDetail.msg);
+    },
+    * upDatePageSetup({ payload: { form } }, { call, put }) {
+      const { data } = yield call(services.upDatePageSetup, form);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
         message.error(data.msg);
     },
-
+    * upDatePrizeList({ payload: { json } }, { call, put }) {
+      const { data } = yield call(services.upDatePrizeList, json);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * upDateProbability({ payload: { form } }, { call, put }) {
+      const { data } = yield call(services.upDateProbability, form);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
   },
 
   reducers: {

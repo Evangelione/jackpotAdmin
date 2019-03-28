@@ -47,9 +47,64 @@ export function fetchImei(page, category) {
   });
 }
 
-export function fetchActivityDetail(id) {
-  return request(`${api}/admin/activity?id=${id}`, {
+export function fetchPageSetupDetail(id) {
+  return request(`${api}/admin/activity?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+  });
+}
+
+export function fetchIMeiDetail(id) {
+  return request(`${api}/admin/activity/imei/detail?activityId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchprizeDetail(id) {
+  return request(`${api}/admin/activity/prize/detail?activityId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchprobabilityDetail(id) {
+  return request(`${api}/admin/activity/setup/detail?activityId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function upDatePageSetup(form) {
+  let formData = new FormData();
+  Object.keys(form).forEach((key, i) => {
+    formData.append(key, form[key]);
+  });
+  return request(`${api}/admin/activity/update`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function upDatePrizeList(json) {
+  return request(`${api}/admin/activity/prize`, {
+    method: 'POST',
+    credentials: 'omit',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(json),
+  });
+}
+export function upDateProbability(form) {
+  let formData = new FormData();
+  Object.keys(form).forEach((key, i) => {
+    formData.append(key, form[key]);
+  });
+  return request(`${api}/admin/activity/setup`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
   });
 }

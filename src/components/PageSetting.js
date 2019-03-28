@@ -4,6 +4,8 @@ import { formItemLayout } from '@/common/constant';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
 import { api } from '@/common/constant';
+import moment from 'moment';
+import { connect } from 'dva';
 
 const { TextArea } = Input;
 const strConfig = {
@@ -13,70 +15,116 @@ const timeConfig = {
   rules: [{ type: 'object', required: true, message: '请选择时间' }],
 };
 
+@connect(({ bigWheel }) => ({
+  bigWheel,
+}))
 @Form.create()
 class PageSetting extends Component {
   state = {
-    kvFileList: [{
-      uid: '-1',
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }],
+    banner: [],
+    background: [],
+    ad: [],
+    pointer: [],
+    turntable: [],
     uploading: false,
   };
 
-  changeKV = (info) => {
-    // console.log(pic);
-    // this.setState({
-    //   kvFileList: [{
-    //     uid: pic.file.uid,
-    //     name: pic.file.name,
-    //     status: pic.file.status,
-    //     url: pic.file.thumbUrl,
-    //     thumbUrl: pic.file.thumbUrl,
-    //   }],
-    // });
-    let fileList = info.fileList;
-
-    // 1. Limit the number of uploaded files
-    // Only to show two recent uploaded files, and old ones will be replaced by the new
-    fileList = fileList.slice(-2);
-
-    // 2. Read from response and show file link
-    fileList = fileList.map((file) => {
-      if (file.response) {
-        // Component will show file.url as link
-        file.url = file.response.url;
-      }
-      return file;
-    });
-
-    // 3. Filter successfully uploaded files according to response from server
-    fileList = fileList.filter((file) => {
-      if (file.response) {
-        return file.response.status === 'success';
-      }
-      return false;
-    });
-
-    this.setState({ kvFileList: fileList });
-  };
-
-  beforeUpload = (file) => {
+  componentDidMount() {
+    const { detail } = this.props;
     this.setState({
-      kvFileList: [file],
+      banner: [{
+        uid: '-1',
+        url: detail.banner,
+        thumbUrl: detail.banner,
+      }],
+      background: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.background,
+        thumbUrl: detail.background,
+      }],
+      ad: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.ad,
+        thumbUrl: detail.ad,
+      }],
+      pointer: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.pointer,
+        thumbUrl: detail.pointer,
+      }],
+      turntable: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.turntable,
+        thumbUrl: detail.turntable,
+      }],
     });
-    this.handleUpload();
+    this.props.form.setFieldsValue({
+      title: detail.title,
+      banner: detail.banner,
+      background: detail.background,
+      ad: detail.ad,
+      startTime: detail.starttime && moment(detail.starttime),
+      endTime: detail.endtime && moment(detail.endtime),
+      description: detail.description,
+      pointer: detail.pointer,
+      turntable: detail.turntable,
+      record: detail.record,
+      newest: detail.newest,
+    });
+  }
+
+  // changeKV = (info) => {
+  //   // console.log(pic);
+  //   // this.setState({
+  //   //   banner: [{
+  //   //     uid: pic.file.uid,
+  //   //     name: pic.file.name,
+  //   //     status: pic.file.status,
+  //   //     url: pic.file.thumbUrl,
+  //   //     thumbUrl: pic.file.thumbUrl,
+  //   //   }],
+  //   // });
+  //   let fileList = info.fileList;
+  //
+  //   // 1. Limit the number of uploaded files
+  //   // Only to show two recent uploaded files, and old ones will be replaced by the new
+  //   fileList = fileList.slice(-2);
+  //
+  //   // 2. Read from response and show file link
+  //   fileList = fileList.map((file) => {
+  //     if (file.response) {
+  //       // Component will show file.url as link
+  //       file.url = file.response.url;
+  //     }
+  //     return file;
+  //   });
+  //
+  //   // 3. Filter successfully uploaded files according to response from server
+  //   fileList = fileList.filter((file) => {
+  //     if (file.response) {
+  //       return file.response.status === 'success';
+  //     }
+  //     return false;
+  //   });
+  //
+  //   this.setState({ banner: fileList });
+  // };
+
+  beforeUpload = (field, file) => {
+    // this.setState({
+    //   [field]: [file],
+    // });
+    this.handleUpload(field, file);
     return false;
   };
 
-  handleUpload = () => {
-    const { kvFileList } = this.state;
+  handleUpload = (field, file) => {
     const formData = new FormData();
-    kvFileList.forEach((file) => {
-      formData.append('file', file);
-    });
+    formData.append('file', file);
 
     this.setState({
       uploading: true,
@@ -93,8 +141,18 @@ class PageSetting extends Component {
       success: (resp) => {
         console.log(resp);
         this.setState({
-          fileList: [],
+          [field]: [{
+            ...this.state[field],
+            uid: resp.data.id,
+            status: 'done',
+            url: resp.data.url,
+            thumbUrl: resp.data.url,
+          }],
           uploading: false,
+        }, () => {
+          this.props.form.setFieldsValue({
+            [field]: resp.data.url,
+          });
         });
         message.success(resp.msg);
       },
@@ -107,21 +165,37 @@ class PageSetting extends Component {
     });
   };
 
-  render() {
-    const formatedText = formatMessage({
-      id: 'index.bread.index',
+  onRemove = (filed, file) => {
+    this.setState({
+      [filed]: [],
     });
-    console.log(formatedText);
+    this.props.form.setFieldsValue({
+      [filed]: '',
+    });
+  };
+
+  submitPageSetting = () => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        values.id = this.props.detail.id;
+        // values.startTime = values.startTime.toISOString();
+        // values.endTime = values.endTime.toISOString();
+        console.log(values);
+        this.props.dispatch({
+          type: 'bigWheel/upDatePageSetup',
+          payload: {
+            form: values,
+          },
+        });
+      }
+    });
+  };
+
+  render() {
     const { getFieldDecorator } = this.props.form;
     const { uploading } = this.state;
-    const props = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      listType: 'picture',
-      fileList: [...this.state.kvFileList],
-    };
-    console.log(this.state.kvFileList);
     return (
-      <Form {...formItemLayout}>
+      <Form {...formItemLayout} >
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.title"/>}
         >
@@ -138,9 +212,9 @@ class PageSetting extends Component {
             <Upload
               listType='picture'
               loading={uploading}
-              fileList={this.state.kvFileList}
-              beforeUpload={this.beforeUpload}
-            >
+              fileList={this.state.banner}
+              onRemove={this.onRemove.bind(null, 'banner')}
+              beforeUpload={this.beforeUpload.bind(null, 'banner')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>
               </Button>
@@ -151,7 +225,12 @@ class PageSetting extends Component {
           label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}
         >
           {getFieldDecorator('background')(
-            <Upload {...props}>
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.background}
+              onRemove={this.onRemove.bind(null, 'background')}
+              beforeUpload={this.beforeUpload.bind(null, 'background')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>
               </Button>
@@ -162,7 +241,12 @@ class PageSetting extends Component {
           label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}
         >
           {getFieldDecorator('ad')(
-            <Upload {...props}>
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.ad}
+              onRemove={this.onRemove.bind(null, 'ad')}
+              beforeUpload={this.beforeUpload.bind(null, 'ad')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>
               </Button>
@@ -203,7 +287,12 @@ class PageSetting extends Component {
           label={<FormattedMessage id="setting.navBar.pageSetup.pointer"/>}
         >
           {getFieldDecorator('pointer')(
-            <Upload {...props}>
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.pointer}
+              onRemove={this.onRemove.bind(null, 'pointer')}
+              beforeUpload={this.beforeUpload.bind(null, 'pointer')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.pointer.btn"/>
               </Button>
@@ -214,7 +303,12 @@ class PageSetting extends Component {
           label={<FormattedMessage id="setting.navBar.pageSetup.turntable"/>}
         >
           {getFieldDecorator('turntable')(
-            <Upload {...props}>
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.turntable}
+              onRemove={this.onRemove.bind(null, 'turntable')}
+              beforeUpload={this.beforeUpload.bind(null, 'turntable')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.turntable.btn"/>
               </Button>
@@ -224,22 +318,31 @@ class PageSetting extends Component {
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.award"/>}
         >
-          {getFieldDecorator('record')(
-            <Switch defaultChecked/>,
+          {getFieldDecorator('record', { valuePropName: 'checked', initialValue: false })(
+            <Switch/>,
           )}
         </Form.Item>
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.winnersList"/>}
         >
-          {getFieldDecorator('newest')(
-            <Switch defaultChecked/>,
+          {getFieldDecorator('newest', { valuePropName: 'checked', initialValue: false })(
+            <Switch/>,
           )}
         </Form.Item>
         <div style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }}>
+          <Button type='primary' htmlType='button' style={{ marginRight: 10 }} onClick={this.submitPageSetting}>
             <FormattedMessage id="setting.navBar.pageSetup.save"/>
           </Button>
-          <Button type='danger' htmlType='reset'>
+          <Button type='danger' htmlType='reset' onClick={() => {
+            this.props.form.resetFields();
+            this.setState({
+              banner: [],
+              background: [],
+              ad: [],
+              pointer: [],
+              turntable: [],
+            });
+          }}>
             <FormattedMessage id="setting.navBar.pageSetup.reset"/>
           </Button>
         </div>

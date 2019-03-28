@@ -53,7 +53,7 @@ class Index extends Component {
     title: '操作',
     render: (text, record) => {
       return <>
-        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail}>设置</Button>
+        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>设置</Button>
         <br/>
         <Button type='danger'>删除</Button>
       </>;
@@ -85,8 +85,8 @@ class Index extends Component {
     });
   };
 
-  goDetail = () => {
-    router.push('/bigWheelSetting');
+  goDetail = (id) => {
+    router.push({ pathname: '/bigWheelSetting', query: { id } });
   };
 
   bigWheelPageChange = (page) => {

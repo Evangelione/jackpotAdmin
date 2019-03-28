@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon, Input, Select, Upload, Switch, Divider } from 'antd';
-import { formItemLayout } from '@/common/constant';
+import { Button, Form, Select } from 'antd';
+import SingleForm from './SingleItem';
+import withRouter from 'umi/withRouter';
+import { connect } from 'dva';
 
 const { Option } = Select;
-const { TextArea } = Input;
 
-const strConfig = {
-  rules: [{ type: 'string', required: true, message: 'Please select time!' }],
-};
-
-const objConfig = {
-  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-};
-
+@connect(({ bigWheel }) => ({
+  bigWheel,
+}))
 @Form.create()
 class PrizeSetting extends Component {
   state = {
-    prizeQuantity: '1',
+    prizeQuantity: '2',
     fileList: [{
       uid: '-1',
       name: 'xxx.png',
@@ -26,141 +22,24 @@ class PrizeSetting extends Component {
     }],
   };
 
-  changeFile = (info) => {
-    // console.log(pic);
-    // this.setState({
-    //   kvFileList: [{
-    //     uid: pic.file.uid,
-    //     name: pic.file.name,
-    //     status: pic.file.status,
-    //     url: pic.file.thumbUrl,
-    //     thumbUrl: pic.file.thumbUrl,
-    //   }],
-    // });
-    let fileList = info.fileList;
-
-    // 1. Limit the number of uploaded files
-    // Only to show two recent uploaded files, and old ones will be replaced by the new
-    fileList = fileList.slice(-2);
-
-    // 2. Read from response and show file link
-    fileList = fileList.map((file) => {
-      if (file.response) {
-        // Component will show file.url as link
-        file.url = file.response.url;
-      }
-      return file;
+  componentDidMount() {
+    this.setState({
+      prizeQuantity: this.props.detail.length === 0 ? '1' : this.props.detail.length + '',
     });
-
-    // 3. Filter successfully uploaded files according to response from server
-    fileList = fileList.filter((file) => {
-      if (file.response) {
-        return file.response.status === 'success';
-      }
-      return false;
-    });
-
-    this.setState({ fileList });
-  };
+  }
 
   mapFormItem = () => {
-    const { getFieldDecorator } = this.props.form;
     const { prizeQuantity } = this.state;
-    const props = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      listType: 'picture',
-      fileList: [...this.state.fileList],
-    };
     let ele = [];
     for (let i = 0; i < prizeQuantity - 0; i++) {
       ele.push(
-        <div key={Math.random()}>
-          <Divider orientation="left">{i + 1}号奖品</Divider>
-          <Form.Item
-            label='奖项名称'
-          >
-            {getFieldDecorator('prizeName', {
-              ...strConfig,
-            })(
-              <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='奖品名称'
-          >
-            {getFieldDecorator('prizeName2', {
-              ...strConfig,
-            })(
-              <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='中奖概率'
-          >
-            {getFieldDecorator('probability', {
-              ...strConfig,
-            })(
-              <Input addonAfter='%'/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='奖品数量'
-          >
-            {getFieldDecorator('prizeCount', {
-              ...strConfig,
-            })(
-              <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='每日数量'
-          >
-            {getFieldDecorator('dayCount', {
-              ...strConfig,
-            })(
-              <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='可中次数'
-          >
-            {getFieldDecorator('canPrize', {
-              ...strConfig,
-            })(
-              <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='奖品图片'
-          >
-            {getFieldDecorator('prizeImage', {
-              ...objConfig,
-            })(
-              <Upload {...props} onChange={this.changeFile}>
-                <Button>
-                  <Icon type="upload"/> 上传奖品图片
-                </Button>
-              </Upload>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='中奖提示语'
-          >
-            {getFieldDecorator('hint', {
-              ...strConfig,
-            })(
-              <TextArea placeholder="Autosize height with minimum and maximum number of lines"
-                        autosize={{ minRows: 4 }}/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='短信验证'
-          >
-            {getFieldDecorator('dxHint')(
-              <Switch defaultChecked/>,
-            )}
-          </Form.Item>
-        </div>,
+        <SingleForm key={i + Date.now()} item={this.props.detail[i]} index={i} id={this.props.location.query.id}
+                    wrappedComponentRef={(form) => this[`form${i + 1}`] = form}/>,
+      );
+    }
+    if (prizeQuantity - 0 === 0) {
+      ele.push(
+        <SingleForm wrappedComponentRef={(form) => this.form1 = form}/>,
       );
     }
     console.log(ele);
@@ -173,35 +52,49 @@ class PrizeSetting extends Component {
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
+  prizeSubmit = () => {
     const { prizeQuantity } = this.state;
+    let result = [];
+    for (let i = 0; i < prizeQuantity - 0; i++) {
+      result.push(this[`form${i + 1}`].getFields());
+    }
+    !result.includes(null) && this.props.dispatch({
+      type: 'bigWheel/upDatePrizeList',
+      payload: {
+        json: result,
+      },
+    }).then(() => {
+      this.props.dispatch({
+        type: 'bigWheel/fetchActivityDetail',
+        payload: {
+          id: this.props.id,
+        },
+      });
+
+    });
+    console.log(JSON.stringify(result));
+  };
+
+  render() {
     return (
-      <Form {...formItemLayout}>
-        <Form.Item
-          label='奖项个数'
-        >
-          {getFieldDecorator('quantitySelect', {
-            ...strConfig,
-            initialValue: prizeQuantity,
-          })(
-            <Select placeholder="Please select a country" onChange={this.changeQuantity}>
-              <Option value="1">1</Option>
-              <Option value="2">2</Option>
-              <Option value="3">3</Option>
-              <Option value="4">4</Option>
-              <Option value="5">5</Option>
-            </Select>,
-          )}
-        </Form.Item>
+      <div>
+        <span style={{ margin: '20px 10px 20px 70px', fontSize: 16, color: 'rgba(0, 0, 0, 0.85)' }}>奖项个数：</span>
+        <Select placeholder="Please select a country" value={this.state.prizeQuantity} onChange={this.changeQuantity}
+                style={{ width: 200 }}>
+          <Option value="1">1</Option>
+          <Option value="2">2</Option>
+          <Option value="3">3</Option>
+          <Option value="4">4</Option>
+          <Option value="5">5</Option>
+        </Select>
         {this.mapFormItem()}
         <div style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }}>保存</Button>
+          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.prizeSubmit}>保存</Button>
           <Button type='danger' htmlType='reset'>重置</Button>
         </div>
-      </Form>
+      </div>
     );
   }
 }
 
-export default PrizeSetting;
+export default withRouter(PrizeSetting);

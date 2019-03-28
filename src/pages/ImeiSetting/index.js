@@ -44,7 +44,7 @@ class Index extends Component {
   }
 
   render() {
-    const { imeiList, imeiPage, imeiTotal } = this.props.bigWheel;
+    const {  imeiPage, imeiTotal } = this.props.bigWheel;
     return (
       <div>
         <div style={{ marginBottom: 20 }}>
