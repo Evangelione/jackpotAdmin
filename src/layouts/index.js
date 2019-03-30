@@ -11,7 +11,7 @@ import { connect } from 'dva';
 
 // moment.locale('zh-cn');
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 const BreadcrumbItem = {
@@ -94,9 +94,6 @@ class BasicLayout extends Component {
                 {this.props.children}
               </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
-              Ant Design ©2018 Created by Ant UED
-            </Footer>
           </Layout>
         </Layout>}
       </div>

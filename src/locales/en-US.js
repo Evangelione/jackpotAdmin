@@ -46,6 +46,8 @@ export default {
   'setting.navBar.pageSetup.save': 'save',
   'setting.navBar.pageSetup.reset': 'reset',
   'navBar.lang': 'Languages',
+  'modal.delete.title': 'Delete this record?',
+  'modal.delete.confirm': 'It can\'t be recover after deletion,are you sure to delete it?',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input, Table, Pagination } from 'antd';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import OperatorModal from './components/OperatorModal';
 import { connect } from 'dva';
 
@@ -10,38 +11,40 @@ const { Search } = Input;
 }))
 class Index extends Component {
   columns = [{
-    title: '姓名',
+    title: <FormattedMessage id="administrator.list.table.name"/>,
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: '账号',
+    title: <FormattedMessage id="administrator.list.table.account"/>,
     dataIndex: 'username',
     key: 'username',
   }, {
-    title: '权限',
+    title: <FormattedMessage id="administrator.list.table.operatingAuthorization"/>,
     dataIndex: 'auth',
     key: 'auth',
     render: (text) => {
       switch (text) {
         case '1':
-          return '查看';
+          return formatMessage({ id: 'administrator.list.table.check' });
         case '2':
-          return '兑奖';
+          return formatMessage({ id: 'administrator.list.table.redeem' });
         case '3':
-          return '管理员';
+          return formatMessage({ id: 'administrator.list.table.administrator' });
         default:
           return null;
       }
     },
   }, {
-    title: '创建时间',
+    title: <FormattedMessage id="administrator.list.table.creationTime"/>,
     dataIndex: 'createtime',
     key: 'createtime',
   }, {
-    title: '编辑',
+    title: <FormattedMessage id="administrator.list.table.edit"/>,
     render: (text, record) => {
       return <OperatorModal modify={record}>
-        <Button type='primary'>编辑</Button>
+        <Button type='primary'>
+          {formatMessage({ id: 'administrator.list.table.edit' })}
+        </Button>
       </OperatorModal>;
     },
   }];
@@ -85,7 +88,9 @@ class Index extends Component {
       <>
         <div style={{ textAlign: 'right', marginBottom: 20 }}>
           <OperatorModal>
-            <Button type='primary' htmlType='button'>新增管理员</Button>
+            <Button type='primary' htmlType='button'>
+              {formatMessage({ id: 'administrator.add.btn' })}
+            </Button>
           </OperatorModal>
           <div style={{ display: 'inline-block', verticalAlign: 'bottom', marginLeft: 10 }}>
             <Search style={{ width: 300 }} onSearch={this.searchUserList} onChange={this.keyWordChange}/>

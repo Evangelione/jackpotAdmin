@@ -46,6 +46,8 @@ export default {
   'setting.navBar.pageSetup.save': '保存',
   'setting.navBar.pageSetup.reset': '重置',
   'navBar.lang': '语言',
+  'modal.delete.title': '删除本条记录？',
+  'modal.delete.confirm': '删除后数据无法恢复，确认要删除吗？',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

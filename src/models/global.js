@@ -1,3 +1,6 @@
+import * as services from '../services/global';
+import { message } from 'antd';
+
 export default {
   namespace: 'global',
   state: {
@@ -17,7 +20,15 @@ export default {
     },
   },
 
-  effects: {},
+  effects: {
+    * deleteGlobalImei({ payload: { id } }, { call }) {
+      const { data } = yield call(services.deleteGlobalImei, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+  },
 
   reducers: {
     save(state, action) {

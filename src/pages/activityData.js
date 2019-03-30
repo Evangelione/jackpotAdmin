@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Button, Pagination, Input, Select, Modal, message } from 'antd';
 import { connect } from 'dva';
+import moment from 'moment';
+import { api } from '@/common/constant';
 
 const Option = Select.Option;
 const confirm = Modal.confirm;
@@ -60,6 +62,9 @@ class ActivityData extends Component {
     title: '中奖时间',
     dataIndex: 'createtime',
     key: 'createtime',
+    render: (text, record) => {
+      return moment(text).format('YYYY-MM-DD HH:mm:ss');
+    },
   }, {
     title: '兑奖码',
     dataIndex: 'awardCode',
@@ -132,13 +137,7 @@ class ActivityData extends Component {
 
   exportImei = () => {
     const { id } = this.props.location.query;
-    this.props.dispatch({
-      type: 'bigWheel/exportDetailExcel',
-      payload: {
-        id,
-      },
-    });
-    // window.location.href = `${api}/admin/activity/user/export`;
+    window.location.href = `${api}/admin/activity/user/export?activityId=${id}`;
   };
 
   changeField = (field, e) => {
@@ -200,15 +199,17 @@ class ActivityData extends Component {
       return false;
     }
     this.props.dispatch({
-      type: 'bigWheel/redeem',
+      type: 'bigWheel/lotteryRedeem',
       payload: {
-        phone: 1,
-        code: 1,
+        phone: postPhone,
+        code: postCode,
       },
+    }).then(() => {
+      this.setState({
+        visible: false,
+      });
     });
-    this.setState({
-      visible: false,
-    });
+
   };
 
   handleCancel = (e) => {

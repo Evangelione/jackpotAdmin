@@ -20,6 +20,7 @@ export default {
     probabilityDetail: {},
     prizeList: [],
     phoneModalList: [],
+    activityUrl: '',
   },
 
   subscriptions: {
@@ -37,6 +38,7 @@ export default {
             bigWheelList: data.data.list,
             bigWheelPage: page,
             bigWheelTotal: data.data.total,
+            activityUrl: data.data.activityUrl,
           },
         })
         :
@@ -63,8 +65,8 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchImei({ payload: { page = 1, category } }, { call, put }) {
-      const { data } = yield call(services.fetchImei, page, category);
+    * fetchImei({ payload: { page = 1 } }, { call, put }) {
+      const { data } = yield call(services.fetchImei, page);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -169,10 +171,6 @@ export default {
         message.success(data.msg)
         :
         message.error(data.msg);
-    },
-    * exportDetailExcel({ payload: { id } }, { call, put }) {
-      const data = yield call(services.exportDetailExcel, id);
-      window.location.href = data;
     },
     * loginAdmin({ payload: { username, password } }, { call, put }) {
       const data = yield call(services.loginAdmin, username, password);

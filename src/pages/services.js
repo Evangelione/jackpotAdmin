@@ -40,8 +40,8 @@ export function fetchActivityData(page, id, imei, phone, name, prize) {
   });
 }
 
-export function fetchImei(page, category) {
-  return request(`${api}/admin/activity/user?pageNum=${page}&pageSize=${PAGESIZE}&category=${category}`, {
+export function fetchImei(page) {
+  return request(`${api}/admin/imei/list?pageNum=${page}&pageSize=${PAGESIZE}`, {
     method: 'GET',
     credentials: 'omit',
   });
@@ -160,16 +160,6 @@ export function deleteActivityData(id) {
   let formData = new FormData();
   formData.append('id', id);
   return request(`${api}/admin/activity/delete`, {
-    method: 'POST',
-    credentials: 'omit',
-    body: formData,
-  });
-}
-
-export function exportDetailExcel(id) {
-  let formData = new FormData();
-  formData.append('activityId', id);
-  return request(`${api}/admin/activity/user/export`, {
     method: 'POST',
     credentials: 'omit',
     body: formData,

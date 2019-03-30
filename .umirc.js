@@ -1,4 +1,3 @@
-
 // ref: https://umijs.org/config/
 export default {
   treeShaking: true,
@@ -25,4 +24,5 @@ export default {
       },
     }],
   ],
-}
+  publicPath: '/admin',
+};

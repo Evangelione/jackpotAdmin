@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Form, Input, Radio, message } from 'antd';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 
 const RadioGroup = Radio.Group;
@@ -69,11 +70,11 @@ class OperatorModal extends Component {
     const formItemLayout = {
       labelCol: {
         sm: { span: 24 },
-        md: { span: 5 },
+        md: { span: 8 },
       },
       wrapperCol: {
         sm: { span: 24 },
-        md: { span: 12 },
+        md: { span: 15 },
       },
     };
 
@@ -81,73 +82,74 @@ class OperatorModal extends Component {
       <div onClick={this.showModal} style={{ display: 'inline-block' }}>
         {this.props.children}
         <Modal
-          title={`管理员`}
+          title={formatMessage({ id: 'administrator.list.table.administrator' })}
           visible={visible}
           onOk={this.handleOk}
+          okText={formatMessage({ id: 'administrator.list.modal.submit' })}
           onCancel={this.handleCancel}
+          cancelText={formatMessage({ id: 'administrator.list.modal.cancel' })}
         >
           <Form {...formItemLayout}>
             <Form.Item
-              label='姓名'
+              label={formatMessage({ id: 'administrator.list.table.name' })}
             >
               {getFieldDecorator('name', {
                 rules: [{
-                  required: true, message: '请输入姓名!',
+                  required: true, message: formatMessage({ id: 'administrator.list.modal.name.place' }),
                 }],
               })(
-                <Input placeholder='请输入姓名'/>,
+                <Input placeholder={formatMessage({ id: 'administrator.list.modal.name.place' })}/>,
               )}
             </Form.Item>
             <Form.Item
-              label='账号'
+              label={formatMessage({ id: 'administrator.list.table.account' })}
             >
               {getFieldDecorator('username', {
                 rules: [{
-                  required: true, message: '请输入账号!',
+                  required: true, message: formatMessage({ id: 'administrator.list.modal.account.place' }),
                 }],
               })(
-                <Input placeholder='请输入账号'/>,
+                <Input placeholder={formatMessage({ id: 'administrator.list.modal.account.place' })}/>,
               )}
             </Form.Item>
             <Form.Item
-              label='密码'
+              label={formatMessage({ id: 'administrator.list.table.password' })}
             >
               {getFieldDecorator('password', {
                 rules: [{
-                  required: true, message: '请输入密码!',
+                  required: true, message: formatMessage({ id: 'administrator.list.modal.password.place' }),
                 }],
               })(
-                <Input.Password placeholder='请输入密码'/>,
+                <Input.Password placeholder={formatMessage({ id: 'administrator.list.modal.password.place' })}/>,
               )}
             </Form.Item>
             <Form.Item
-              label='确认密码'
+              label={formatMessage({ id: 'administrator.list.table.confirmPassword' })}
             >
               {getFieldDecorator('password2', {
                 rules: [{
-                  required: true, message: '请确认密码!',
+                  required: true, message: formatMessage({ id: 'administrator.list.modal.confirmPassword.place' }),
                 }],
               })(
-                <Input.Password placeholder='请确认密码'/>,
+                <Input.Password placeholder={formatMessage({ id: 'administrator.list.modal.confirmPassword.place' })}/>,
               )}
             </Form.Item>
             <Form.Item
-              label='权限'
+              label={formatMessage({ id: 'administrator.list.table.operatingAuthorization' })}
             >
               {getFieldDecorator('auth', {
                 initialValue: '1',
               })(
                 <RadioGroup onChange={this.onChange}>
-                  <Radio value='1'>查看</Radio>
-                  <Radio value='2'>兑奖</Radio>
-                  <Radio value='3'>管理员</Radio>
+                  <Radio value='1'>{formatMessage({ id: 'administrator.list.table.check' })}</Radio>
+                  <Radio value='2'>{formatMessage({ id: 'administrator.list.table.redeem' })}</Radio>
+                  <Radio value='3'>{formatMessage({ id: 'administrator.list.table.administrator' })}</Radio>
                 </RadioGroup>,
               )}
             </Form.Item>
           </Form>
         </Modal>
       </div>
-
     );
   }
 }
