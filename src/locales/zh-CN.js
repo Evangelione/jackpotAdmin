@@ -11,6 +11,8 @@ export default {
   'index.bread.eggFrenzy': '砸金蛋',
   'index.bread.imei': '全局IMEI设置',
   'index.bread.admin': '管理员设置',
+  'index.bread.activeData': '活动数据',
+  'index.bread.pageSetting': '活动设置',
   'setting.navBar.pageSetup': '管理员设置',
   'setting.navBar.imeiSetting': 'IMEI设置',
   'setting.navBar.prizeSetting': '奖品设置',

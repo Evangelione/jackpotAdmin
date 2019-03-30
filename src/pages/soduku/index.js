@@ -13,8 +13,9 @@ class Index extends Component {
     key: 'title',
   }, {
     title: '活动链接',
-    dataIndex: 'age',
-    key: 'age',
+    render: (text, record) => {
+      return `http://lottery.morefun.co.in/?activityId=${record.id}`;
+    },
   }, {
     title: '活动二维码',
     dataIndex: 'address',

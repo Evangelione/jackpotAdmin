@@ -33,8 +33,8 @@ export function updateUser({ name, username, password, auth, id }) {
 }
 
 
-export function fetchActivityData(page, category) {
-  return request(`${api}/admin/activity/user?pageNum=${page}&pageSize=${PAGESIZE}&category=${category}`, {
+export function fetchActivityData(page, id, imei, phone, name, prize) {
+  return request(`${api}/admin/activity/user?pageNum=${page}&pageSize=${PAGESIZE}&activityId=${id}&imei=${imei}&phone=${phone}&name=${name}&prizeId=${prize}`, {
     method: 'GET',
     credentials: 'omit',
   });
@@ -97,12 +97,111 @@ export function upDatePrizeList(json) {
     body: JSON.stringify(json),
   });
 }
-export function upDateProbability(form) {
-  let formData = new FormData();
-  Object.keys(form).forEach((key, i) => {
-    formData.append(key, form[key]);
-  });
+
+export function upDateProbability(json) {
   return request(`${api}/admin/activity/setup`, {
+    method: 'POST',
+    credentials: 'omit',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(json),
+  });
+}
+
+export function upDateProbabilityNormal(id, count) {
+  let formData = new FormData();
+  formData.append('activityId', id);
+  formData.append('luckyTimes', count);
+  return request(`${api}/admin/activity/luckTimes`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function upDateIMei(id, type, file) {
+  let formData = new FormData();
+  formData.append('activityId', id);
+  formData.append('type', type);
+  file && formData.append('file', file);
+  return request(`${api}/admin/activity/imei`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function fetchPrizeList(id) {
+  return request(`${api}/admin/activity/prize/list?activityId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchPhoneModal() {
+  return request(`${api}/admin/imei/name/list`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function deleteDanger(id) {
+  let formData = new FormData();
+  formData.append('id', id);
+  return request(`${api}/admin/activity/user/delete`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function deleteActivityData(id) {
+  let formData = new FormData();
+  formData.append('id', id);
+  return request(`${api}/admin/activity/delete`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function exportDetailExcel(id) {
+  let formData = new FormData();
+  formData.append('activityId', id);
+  return request(`${api}/admin/activity/user/export`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function loginAdmin(username, password) {
+  let formData = new FormData();
+  formData.append('username', username);
+  formData.append('password', password);
+  return request(`${api}/admin/user/login`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function lotteryRedeem(id) {
+  let formData = new FormData();
+  formData.append('id', id);
+  return request(`${api}/admin/activity/user/redeem`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
+
+export function getCode(phone, type) {
+  let formData = new FormData();
+  formData.append('phone', phone);
+  formData.append('type', type);
+  return request(`${api}/api/sms`, {
     method: 'POST',
     credentials: 'omit',
     body: formData,

@@ -18,6 +18,8 @@ export default {
     imeiDetail: {},
     prizeDetail: [],
     probabilityDetail: {},
+    prizeList: [],
+    phoneModalList: [],
   },
 
   subscriptions: {
@@ -47,8 +49,8 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchActivityData({ payload: { page = 1, category } }, { call, put }) {
-      const { data } = yield call(services.fetchActivityData, page, category);
+    * fetchActivityData({ payload: { page = 1, id, imei = '', phone = '', name = '', prize = '' } }, { call, put }) {
+      const { data } = yield call(services.fetchActivityData, page, id, imei, phone, name, prize);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -108,13 +110,92 @@ export default {
         :
         message.error(data.msg);
     },
-    * upDateProbability({ payload: { form } }, { call, put }) {
-      const { data } = yield call(services.upDateProbability, form);
+    * upDateProbability({ payload: { json } }, { call, put }) {
+      const { data } = yield call(services.upDateProbability, json);
       parseInt(data.code, 10) === 1 ?
         message.success(data.msg)
         :
         message.error(data.msg);
     },
+    * upDateProbabilityNormal({ payload: { id, count } }, { call, put }) {
+      const { data } = yield call(services.upDateProbabilityNormal, id, count);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+
+    * upDateIMei({ payload: { id, type, file } }, { call }) {
+      const { data } = yield call(services.upDateIMei, id, type, file);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * fetchPrizeList({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchPrizeList, id);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            prizeList: data.data,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * fetchPhoneModal({ payload }, { call, put }) {
+      const { data } = yield call(services.fetchPhoneModal);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            phoneModalList: data.data,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * deleteDanger({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.deleteDanger, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * deleteActivityData({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.deleteActivityData, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * exportDetailExcel({ payload: { id } }, { call, put }) {
+      const data = yield call(services.exportDetailExcel, id);
+      window.location.href = data;
+    },
+    * loginAdmin({ payload: { username, password } }, { call, put }) {
+      const data = yield call(services.loginAdmin, username, password);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * lotteryRedeem({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.lotteryRedeem, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+    * getCode({ payload: { phone, type } }, { call, put }) {
+      const { data } = yield call(services.getCode, phone, type);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
+    },
+
   },
 
   reducers: {

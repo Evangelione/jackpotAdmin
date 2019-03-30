@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Radio, Button } from 'antd';
+import { Button, Form, Input, Radio, message } from 'antd';
 import { formItemLayout } from '@/common/constant';
 import SingleModel from './SingleModel';
 import { connect } from 'dva';
+import withRouter from 'umi/withRouter';
 
 const RadioGroup = Radio.Group;
 
@@ -12,18 +13,42 @@ const RadioGroup = Radio.Group;
 @Form.create()
 class PossibilitySetting extends Component {
   state = {
-    radio: 1,
+    radio: 0,
     phoneQuantity: '1',
+    detail: [],
   };
 
-  componentDidMount() {
-    // this.setState({
-    //   prizeQuantity: this.props.detail.length === 0 ? '1' : this.props.detail.length + '',
-    // });
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'bigWheel/fetchPrizeList',
+      payload: {
+        id: this.props.id,
+      },
+    });
+    this.props.dispatch({
+      type: 'bigWheel/fetchPhoneModal',
+      payload: {},
+    });
+    if (this.props.detail.type === 1) {
+      this.setState({
+        radio: this.props.detail.type,
+      }, () => {
+        this.props.form.setFieldsValue({
+          luckyTimes: this.props.detail.luckyTimes,
+        });
+      });
+    } else {
+      let detail = this.serialization(this.props.detail.setup);
+      this.setState({
+        detail,
+        phoneQuantity: detail.length + '',
+        radio: this.props.detail.type,
+      });
+    }
+
   }
 
   onChange = (e) => {
-    console.log('radio checked', e.target.value);
     this.setState({
       radio: e.target.value,
     });
@@ -35,38 +60,94 @@ class PossibilitySetting extends Component {
     });
   };
 
+  deletePhone = () => {
+    this.setState({
+      phoneQuantity: (this.state.phoneQuantity - 0) - 1 + '',
+    });
+  };
+
+  serialization = (arr) => {
+    if (!arr) return [];
+    let result = [];
+    arr.forEach((value, index) => {
+      if (!result.length) {
+        result.push([value]);
+        return false;
+      }
+      if (result[result.length - 1][0].name === value.name) {
+        result[result.length - 1].push(value);
+      } else {
+        result.push([value]);
+      }
+    });
+    return result;
+  };
+
   mapPhone = () => {
     const { phoneQuantity } = this.state;
     let ele = [];
     for (let i = 0; i < phoneQuantity - 0; i++) {
       ele.push(
-        <SingleModel key={i + Date.now()} i={i} wrappedComponentRef={(form) => this[`form${i + 1}`] = form}/>,
+        <SingleModel key={i + Date.now()} item={this.state.detail[i]} i={i} prizeList={this.props.bigWheel.prizeList}
+                     phoneModalList={this.props.bigWheel.phoneModalList} id={this.props.location.query.id}
+                     wrappedComponentRef={(form) => this[`form${i + 1}`] = form}/>,
       );
     }
     return ele;
   };
 
   proSubmit = () => {
-    const { phoneQuantity } = this.state;
-    let result = [];
-    debugger
-    for (let i = 0; i < phoneQuantity - 0; i++) {
-      result.push(this[`form${i + 1}`].getFields());
-    }
-    !result.includes(null) && this.props.dispatch({
-      type: 'bigWheel/upDateProbability',
-      payload: {
-        form: result,
-      },
-    }).then(() => {
-      this.props.dispatch({
-        type: 'bigWheel/fetchActivityDetail',
+    if (this.state.radio === 0) {
+      const { phoneQuantity } = this.state;
+      let result = [];
+      for (let i = 0; i < phoneQuantity - 0; i++) {
+        let item = this[`form${i + 1}`].getFields();
+        if (result.length && item[0].name === result[result.length - 1].name) {
+          message.error('不能选择相同机型');
+          return false;
+        }
+        result.push(...item);
+      }
+      !result.includes(null) && this.props.dispatch({
+        type: 'bigWheel/upDateProbability',
         payload: {
-          id: this.props.id,
+          json: result,
         },
+      }).then(() => {
+        this.props.dispatch({
+          type: 'bigWheel/fetchActivityDetail',
+          payload: {
+            id: this.props.id,
+          },
+        }).then(() => {
+          let detail = this.serialization(this.props.detail);
+          this.setState({
+            detail,
+            phoneQuantity: detail.length + '',
+          });
+        });
+
       });
-    });
-    console.log(result);
+    } else {
+      this.props.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          this.props.dispatch({
+            type: 'bigWheel/upDateProbabilityNormal',
+            payload: {
+              id: this.props.id,
+              count: values.luckyTimes,
+            },
+          }).then(() => {
+            this.props.dispatch({
+              type: 'bigWheel/fetchActivityDetail',
+              payload: {
+                id: this.props.id,
+              },
+            });
+          });
+        }
+      });
+    }
   };
 
   // mapPrizeList = () => {
@@ -124,14 +205,15 @@ class PossibilitySetting extends Component {
         {/*<Divider/>*/}
         <div style={{ margin: '20px 10px' }}>
           <span>活动类型：</span>
-          <RadioGroup defaultValue={1} onChange={this.onChange}>
-            <Radio value={1}>关联机型</Radio>
-            <Radio value={2}>正常活动</Radio>
+          <RadioGroup value={this.state.radio} onChange={this.onChange}>
+            <Radio value={0}>关联机型</Radio>
+            <Radio value={1}>正常活动</Radio>
           </RadioGroup>,
         </div>
-        {radio === 1 ?
+        {radio === 0 ?
           <div>
             <Button type='primary' onClick={this.addPhone} style={{ margin: '20px 10px' }}>添加机型</Button>
+            <Button type='primary' onClick={this.deletePhone} style={{ margin: '20px 10px' }}>删除机型</Button>
             {this.mapPhone()}
           </div>
           :
@@ -149,11 +231,10 @@ class PossibilitySetting extends Component {
         }
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.proSubmit}>保存</Button>
-          <Button type='danger' htmlType='reset'>重置</Button>
         </div>
       </div>
     );
   }
 }
 
-export default PossibilitySetting;
+export default withRouter(PossibilitySetting);

@@ -80,7 +80,6 @@ class SingleItem extends Component {
       uploading: true,
     });
 
-    console.log(formData);
 
     // You can use any AJAX library you like
     reqwest({
@@ -89,7 +88,6 @@ class SingleItem extends Component {
       processData: false,
       data: formData,
       success: (resp) => {
-        console.log(resp);
         this.setState({
           [field]: [{
             ...this.state[field],
@@ -221,6 +219,7 @@ class SingleItem extends Component {
         </Form.Item>
         <Form.Item
           label='id'
+          style={{ display: 'none' }}
         >
           {getFieldDecorator('id')(
             <Input disabled={true}/>,

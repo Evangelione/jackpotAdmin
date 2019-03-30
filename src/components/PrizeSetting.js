@@ -42,7 +42,6 @@ class PrizeSetting extends Component {
         <SingleForm wrappedComponentRef={(form) => this.form1 = form}/>,
       );
     }
-    console.log(ele);
     return ele;
   };
 
@@ -72,7 +71,6 @@ class PrizeSetting extends Component {
       });
 
     });
-    console.log(JSON.stringify(result));
   };
 
   render() {
@@ -90,7 +88,6 @@ class PrizeSetting extends Component {
         {this.mapFormItem()}
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.prizeSubmit}>保存</Button>
-          <Button type='danger' htmlType='reset'>重置</Button>
         </div>
       </div>
     );

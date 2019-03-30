@@ -16,7 +16,6 @@ class OperatorModal extends Component {
   showModal = () => {
     if (this.state.visible) return false;
     const { modify } = this.props;
-    console.log(modify);
     modify && (
       this.props.form.setFieldsValue({
         name: modify.name,
@@ -30,7 +29,6 @@ class OperatorModal extends Component {
   };
 
   handleOk = (e) => {
-    console.log(e);
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         if (values.password !== values.password2) {
@@ -59,7 +57,6 @@ class OperatorModal extends Component {
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.props.form.resetFields();
     this.setState({
       visible: false,

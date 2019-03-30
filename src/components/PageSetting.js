@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, DatePicker, Upload, Button, Icon, Switch, message } from 'antd';
+import { Form, Input, DatePicker, Button, Switch, message } from 'antd';
 import { formItemLayout } from '@/common/constant';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
@@ -31,47 +31,47 @@ class PageSetting extends Component {
 
   componentDidMount() {
     const { detail } = this.props;
-    this.setState({
-      banner: [{
-        uid: '-1',
-        url: detail.banner,
-        thumbUrl: detail.banner,
-      }],
-      background: [{
-        uid: '-1',
-        status: 'done',
-        url: detail.background,
-        thumbUrl: detail.background,
-      }],
-      ad: [{
-        uid: '-1',
-        status: 'done',
-        url: detail.ad,
-        thumbUrl: detail.ad,
-      }],
-      pointer: [{
-        uid: '-1',
-        status: 'done',
-        url: detail.pointer,
-        thumbUrl: detail.pointer,
-      }],
-      turntable: [{
-        uid: '-1',
-        status: 'done',
-        url: detail.turntable,
-        thumbUrl: detail.turntable,
-      }],
-    });
+    // this.setState({
+    //   banner: [{
+    //     uid: '-1',
+    //     url: detail.banner,
+    //     thumbUrl: detail.banner,
+    //   }],
+    //   background: [{
+    //     uid: '-1',
+    //     status: 'done',
+    //     url: detail.background,
+    //     thumbUrl: detail.background,
+    //   }],
+    //   ad: [{
+    //     uid: '-1',
+    //     status: 'done',
+    //     url: detail.ad,
+    //     thumbUrl: detail.ad,
+    //   }],
+    //   pointer: [{
+    //     uid: '-1',
+    //     status: 'done',
+    //     url: detail.pointer,
+    //     thumbUrl: detail.pointer,
+    //   }],
+    //   turntable: [{
+    //     uid: '-1',
+    //     status: 'done',
+    //     url: detail.turntable,
+    //     thumbUrl: detail.turntable,
+    //   }],
+    // });
     this.props.form.setFieldsValue({
       title: detail.title,
-      banner: detail.banner,
-      background: detail.background,
-      ad: detail.ad,
+      // banner: detail.banner,
+      // background: detail.background,
+      // ad: detail.ad,
       startTime: detail.starttime && moment(detail.starttime),
       endTime: detail.endtime && moment(detail.endtime),
       description: detail.description,
-      pointer: detail.pointer,
-      turntable: detail.turntable,
+      // pointer: detail.pointer,
+      // turntable: detail.turntable,
       record: detail.record,
       newest: detail.newest,
     });
@@ -130,7 +130,6 @@ class PageSetting extends Component {
       uploading: true,
     });
 
-    console.log(formData);
 
     // You can use any AJAX library you like
     reqwest({
@@ -139,7 +138,6 @@ class PageSetting extends Component {
       processData: false,
       data: formData,
       success: (resp) => {
-        console.log(resp);
         this.setState({
           [field]: [{
             ...this.state[field],
@@ -180,7 +178,6 @@ class PageSetting extends Component {
         values.id = this.props.detail.id;
         // values.startTime = values.startTime.toISOString();
         // values.endTime = values.endTime.toISOString();
-        console.log(values);
         this.props.dispatch({
           type: 'bigWheel/upDatePageSetup',
           payload: {
@@ -193,7 +190,7 @@ class PageSetting extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { uploading } = this.state;
+    // const { uploading } = this.state;
     return (
       <Form {...formItemLayout} >
         <Form.Item
@@ -205,54 +202,54 @@ class PageSetting extends Component {
             })}/>,
           )}
         </Form.Item>
-        <Form.Item
-          label={<FormattedMessage id="setting.navBar.pageSetup.kv"/>}
-        >
-          {getFieldDecorator('banner')(
-            <Upload
-              listType='picture'
-              loading={uploading}
-              fileList={this.state.banner}
-              onRemove={this.onRemove.bind(null, 'banner')}
-              beforeUpload={this.beforeUpload.bind(null, 'banner')}>
-              <Button>
-                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>
-              </Button>
-            </Upload>,
-          )}
-        </Form.Item>
-        <Form.Item
-          label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}
-        >
-          {getFieldDecorator('background')(
-            <Upload
-              listType='picture'
-              loading={uploading}
-              fileList={this.state.background}
-              onRemove={this.onRemove.bind(null, 'background')}
-              beforeUpload={this.beforeUpload.bind(null, 'background')}>
-              <Button>
-                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>
-              </Button>
-            </Upload>,
-          )}
-        </Form.Item>
-        <Form.Item
-          label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}
-        >
-          {getFieldDecorator('ad')(
-            <Upload
-              listType='picture'
-              loading={uploading}
-              fileList={this.state.ad}
-              onRemove={this.onRemove.bind(null, 'ad')}
-              beforeUpload={this.beforeUpload.bind(null, 'ad')}>
-              <Button>
-                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>
-              </Button>
-            </Upload>,
-          )}
-        </Form.Item>
+        {/*<Form.Item*/}
+        {/*label={<FormattedMessage id="setting.navBar.pageSetup.kv"/>}*/}
+        {/*>*/}
+        {/*{getFieldDecorator('banner')(*/}
+        {/*<Upload*/}
+        {/*listType='picture'*/}
+        {/*loading={uploading}*/}
+        {/*fileList={this.state.banner}*/}
+        {/*onRemove={this.onRemove.bind(null, 'banner')}*/}
+        {/*beforeUpload={this.beforeUpload.bind(null, 'banner')}>*/}
+        {/*<Button>*/}
+        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>*/}
+        {/*</Button>*/}
+        {/*</Upload>,*/}
+        {/*)}*/}
+        {/*</Form.Item>*/}
+        {/*<Form.Item*/}
+        {/*label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}*/}
+        {/*>*/}
+        {/*{getFieldDecorator('background')(*/}
+        {/*<Upload*/}
+        {/*listType='picture'*/}
+        {/*loading={uploading}*/}
+        {/*fileList={this.state.background}*/}
+        {/*onRemove={this.onRemove.bind(null, 'background')}*/}
+        {/*beforeUpload={this.beforeUpload.bind(null, 'background')}>*/}
+        {/*<Button>*/}
+        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>*/}
+        {/*</Button>*/}
+        {/*</Upload>,*/}
+        {/*)}*/}
+        {/*</Form.Item>*/}
+        {/*<Form.Item*/}
+        {/*label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}*/}
+        {/*>*/}
+        {/*{getFieldDecorator('ad')(*/}
+        {/*<Upload*/}
+        {/*listType='picture'*/}
+        {/*loading={uploading}*/}
+        {/*fileList={this.state.ad}*/}
+        {/*onRemove={this.onRemove.bind(null, 'ad')}*/}
+        {/*beforeUpload={this.beforeUpload.bind(null, 'ad')}>*/}
+        {/*<Button>*/}
+        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>*/}
+        {/*</Button>*/}
+        {/*</Upload>,*/}
+        {/*)}*/}
+        {/*</Form.Item>*/}
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.start"/>}
         >
@@ -283,38 +280,38 @@ class PageSetting extends Component {
                       autosize={{ minRows: 4 }}/>,
           )}
         </Form.Item>
-        <Form.Item
-          label={<FormattedMessage id="setting.navBar.pageSetup.pointer"/>}
-        >
-          {getFieldDecorator('pointer')(
-            <Upload
-              listType='picture'
-              loading={uploading}
-              fileList={this.state.pointer}
-              onRemove={this.onRemove.bind(null, 'pointer')}
-              beforeUpload={this.beforeUpload.bind(null, 'pointer')}>
-              <Button>
-                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.pointer.btn"/>
-              </Button>
-            </Upload>,
-          )}
-        </Form.Item>
-        <Form.Item
-          label={<FormattedMessage id="setting.navBar.pageSetup.turntable"/>}
-        >
-          {getFieldDecorator('turntable')(
-            <Upload
-              listType='picture'
-              loading={uploading}
-              fileList={this.state.turntable}
-              onRemove={this.onRemove.bind(null, 'turntable')}
-              beforeUpload={this.beforeUpload.bind(null, 'turntable')}>
-              <Button>
-                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.turntable.btn"/>
-              </Button>
-            </Upload>,
-          )}
-        </Form.Item>
+        {/*<Form.Item*/}
+        {/*label={<FormattedMessage id="setting.navBar.pageSetup.pointer"/>}*/}
+        {/*>*/}
+        {/*{getFieldDecorator('pointer')(*/}
+        {/*<Upload*/}
+        {/*listType='picture'*/}
+        {/*loading={uploading}*/}
+        {/*fileList={this.state.pointer}*/}
+        {/*onRemove={this.onRemove.bind(null, 'pointer')}*/}
+        {/*beforeUpload={this.beforeUpload.bind(null, 'pointer')}>*/}
+        {/*<Button>*/}
+        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.pointer.btn"/>*/}
+        {/*</Button>*/}
+        {/*</Upload>,*/}
+        {/*)}*/}
+        {/*</Form.Item>*/}
+        {/*<Form.Item*/}
+        {/*label={<FormattedMessage id="setting.navBar.pageSetup.turntable"/>}*/}
+        {/*>*/}
+        {/*{getFieldDecorator('turntable')(*/}
+        {/*<Upload*/}
+        {/*listType='picture'*/}
+        {/*loading={uploading}*/}
+        {/*fileList={this.state.turntable}*/}
+        {/*onRemove={this.onRemove.bind(null, 'turntable')}*/}
+        {/*beforeUpload={this.beforeUpload.bind(null, 'turntable')}>*/}
+        {/*<Button>*/}
+        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.turntable.btn"/>*/}
+        {/*</Button>*/}
+        {/*</Upload>,*/}
+        {/*)}*/}
+        {/*</Form.Item>*/}
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.award"/>}
         >

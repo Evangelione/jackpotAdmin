@@ -6,23 +6,82 @@ const { Option } = Select;
 const CheckboxGroup = Checkbox.Group;
 
 const strConfig = {
-  rules: [{  required: true, message: 'Please select time!' }],
+  rules: [{ required: true, message: 'Please select time!' }],
 };
 
 @Form.create()
 class SingleModel extends Component {
+  state = {
+    selectedItems: [],
+  };
+
+  componentDidMount() {
+    const { item } = this.props;
+    if (item) {
+      let prizeIdArr = item.map((item, index) => {
+        // this.props.form.setFieldsValue({
+        //   [item.prizeId + '']: item.probability,
+        // });
+        // console.log(item.prizeId + '');
+        return item.prizeId;
+      });
+      this.props.form.setFieldsValue({
+        name: item[0].name,
+        id: item[0].id,
+        luckyTimes: item[0].luckyTimes,
+        prizeWinner: prizeIdArr,
+      });
+      setTimeout(() => {
+        Object.keys(this.props.form.getFieldsValue()).length && item.map((item, index) => {
+          this.props.form.setFieldsValue({
+            [item.prizeId + '']: item.probability,
+          });
+          return item.prizeId;
+        });
+      }, 500);
+    }
+  }
+
+  handleChange = selectedItems => {
+    this.setState({ selectedItems });
+  };
+
+
   getFields = () => {
     let result = null;
     this.props.form.validateFieldsAndScroll((err, values) => {
-      result = values;
       if (!err) {
         // values.activityId = this.props.id;
+        result = values.prizeWinner.map((item, index) => {
+          return {
+            activityId: this.props.id,
+            luckyTimes: values.luckyTimes,
+            name: values.name,
+            prizeId: item,
+            probability: values[item],
+            id: values.id,
+          };
+        });
       }
     });
     return result;
   };
 
-  render() {
+  mapPrizeList = () => {
+    return this.props.prizeList.map((value, index) => {
+      return {
+        label: value.name,
+        value: value.id,
+      };
+    });
+  };
+  mapPhoneModalList = (filteredOptions) => {
+    return filteredOptions.map(((value, index) => {
+      return <Option value={value} key={index}>{value}</Option>;
+    }));
+  };
+
+  mapProbability = () => {
     const { getFieldDecorator } = this.props.form;
     const tailFormItemLayout = {
       labelCol: {
@@ -34,6 +93,33 @@ class SingleModel extends Component {
         md: { span: 8 },
       },
     };
+    let arr = this.props.form.getFieldValue('prizeWinner');
+    return arr && arr.map((item, index) => {
+      let name = '';
+      this.props.prizeList.forEach((value => {
+        if (value.id === item) {
+          name = value.name;
+        }
+      }));
+      return <Form.Item
+        label={name}
+        {...tailFormItemLayout}
+        key={index}
+      >
+        {getFieldDecorator(item + '', {
+          ...strConfig,
+          initialValue: 0,
+        })(
+          <Input addonAfter='%'/>,
+        )}
+      </Form.Item>;
+    });
+  };
+
+  render() {
+    const { selectedItems } = this.state;
+    const filteredOptions = this.props.phoneModalList.filter(o => !selectedItems.includes(o));
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form {...formItemLayout}>
         <Form.Item
@@ -41,14 +127,11 @@ class SingleModel extends Component {
         >
           {getFieldDecorator(`name`, {
             ...strConfig,
-            initialValue: 'x27',
+            initialValue: selectedItems,
           })(
-            <Select placeholder="Please select a country">
-              <Option value="x27">x27</Option>
-              <Option value="2">2</Option>
-              <Option value="3">3</Option>
-              <Option value="4">4</Option>
-              <Option value="5">5</Option>
+            <Select placeholder="Please select a phone modal"
+                    onChange={this.handleChange}>
+              {this.mapPhoneModalList(filteredOptions)}
             </Select>,
           )}
         </Form.Item>
@@ -66,44 +149,22 @@ class SingleModel extends Component {
         >
           {getFieldDecorator(`prizeWinner`, {
             ...strConfig,
-            value: ['Apple'],
           })(
-            <CheckboxGroup options={[
-              { label: 'Apple', value: 'Apple' },
-              { label: 'Pear', value: 'Pear' },
-              { label: 'Orange', value: 'Orange' },
-            ]}/>,
+            <CheckboxGroup options={this.mapPrizeList()}/>,
           )}
         </Form.Item>
         <Form.Item
           label='中奖概率'
         >
-          <Form.Item
-            label='一等奖'
-            {...tailFormItemLayout}
-          >
-            {getFieldDecorator(`1d`)(
-              <Input addonAfter='%'/>,
-            )}
-
-          </Form.Item>
-          <Form.Item
-            label='二等奖'
-            {...tailFormItemLayout}
-          >
-            {getFieldDecorator(`2d`)(
-              <Input addonAfter='%'/>,
-            )}
-          </Form.Item>
-          <Form.Item
-            label='三等奖'
-            {...tailFormItemLayout}
-          >
-            {getFieldDecorator(`3d`)(
-              <Input addonAfter='%'/>,
-            )}
-
-          </Form.Item>
+          {this.mapProbability()}
+        </Form.Item>
+        <Form.Item
+          label='id'
+          style={{display: 'none'}}
+        >
+          {getFieldDecorator(`id`)(
+            <Input disabled={true}/>,
+          )}
         </Form.Item>
         <Divider/>
       </Form>

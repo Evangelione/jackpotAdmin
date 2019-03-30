@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Table, Button, Pagination } from 'antd';
+import { Table, Button, Pagination, Modal } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
+
+const confirm = Modal.confirm;
 
 @connect(({ bigWheel }) => ({
   bigWheel,
@@ -11,10 +13,14 @@ class Index extends Component {
     title: '活动标题',
     dataIndex: 'title',
     key: 'title',
+    render: (text, record) => {
+      return text || '暂未设置';
+    },
   }, {
     title: '活动链接',
-    dataIndex: 'age',
-    key: 'age',
+    render: (text, record) => {
+      return `http://lottery.morefun.co.in/?activityId=${record.id}`;
+    },
   }, {
     title: '活动二维码',
     dataIndex: 'address',
@@ -33,8 +39,9 @@ class Index extends Component {
     },
   }, {
     title: '兑奖链接',
-    dataIndex: 'address3',
-    key: 'address3',
+    render: (text, record) => {
+      return `http://lottery.morefun.co.in/cash?activityId=${record.id}`;
+    },
   }, {
     title: '兑奖二维码',
     dataIndex: 'address4',
@@ -47,7 +54,7 @@ class Index extends Component {
   }, {
     title: '活动数据',
     render: (text, record) => {
-      return <Button type='primary'>查看详情</Button>;
+      return <Button type='primary' onClick={this.goActivityData.bind(null, record.id)}>查看详情</Button>;
     },
   }, {
     title: '操作',
@@ -55,7 +62,7 @@ class Index extends Component {
       return <>
         <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>设置</Button>
         <br/>
-        <Button type='danger'>删除</Button>
+        <Button type='danger' onClick={this.danger.bind(null, record.id)}>删除</Button>
       </>;
     },
   }];
@@ -68,6 +75,39 @@ class Index extends Component {
       },
     });
   }
+
+  danger = (id) => {
+    confirm({
+      title: '删除本条记录？',
+      content: '删除后数据无法恢复，确认要删除吗？',
+      onOk: () => {
+        this.props.dispatch({
+          type: 'bigWheel/deleteActivityData',
+          payload: {
+            id,
+          },
+        }).then(() => {
+          this.props.dispatch({
+            type: 'bigWheel/fetchBigWheelList',
+            payload: {
+              category: 3,
+            },
+          });
+        });
+      },
+    });
+  };
+
+  goActivityData = (id) => {
+    router.push({
+      pathname: '/activityData',
+      query: {
+        category: 3,
+        id,
+      },
+    });
+  };
+
 
   createActivity = () => {
     this.props.dispatch({
@@ -94,6 +134,7 @@ class Index extends Component {
       type: 'bigWheel/fetchBigWheelList',
       payload: {
         page,
+        category: 3,
       },
     });
   };

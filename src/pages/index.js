@@ -14,8 +14,9 @@ class Index extends Component {
     key: 'title',
   }, {
     title: <FormattedMessage id="bigWheel.list.table.activeLink"/>,
-    dataIndex: 'age',
-    key: 'age',
+    render: (text, record) => {
+      return `http://lottery.morefun.co.in/?activityId=${record.id}`;
+    },
   }, {
     title: <FormattedMessage id="bigWheel.list.table.QRCode"/>,
     dataIndex: 'address',
@@ -34,8 +35,9 @@ class Index extends Component {
     },
   }, {
     title: <FormattedMessage id="bigWheel.list.table.redeemLink"/>,
-    dataIndex: 'address3',
-    key: 'address3',
+    render: (text, record) => {
+      return `http://lottery.morefun.co.in/cash?activityId=${record.id}`;
+    },
   }, {
     title: <FormattedMessage id="bigWheel.list.table.redeemQRCode"/>,
     dataIndex: 'address4',
@@ -48,7 +50,7 @@ class Index extends Component {
   }, {
     title: <FormattedMessage id="bigWheel.list.table.activeData"/>,
     render: (text, record) => {
-      return <Button type='primary' onClick={this.goActivityData}>
+      return <Button type='primary' onClick={this.goActivityData.bind(null, record.id)}>
         <FormattedMessage id="bigWheel.list.table.viewDetail"/>
       </Button>;
     },
@@ -67,11 +69,12 @@ class Index extends Component {
     },
   }];
 
-  goActivityData = () => {
+  goActivityData = (id) => {
     router.push({
       pathname: '/activityData',
       query: {
         category: 1,
+        id,
       },
     });
   };

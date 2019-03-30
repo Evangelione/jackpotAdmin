@@ -11,6 +11,8 @@ export default {
   'index.bread.eggFrenzy': 'Egg frenzy',
   'index.bread.imei': 'IMEI global setting',
   'index.bread.admin': 'Administrtor settings',
+  'index.bread.activeData': 'Active data',
+  'index.bread.pageSetting': 'Active Setting',
   'setting.navBar.pageSetup': 'page setup',
   'setting.navBar.imeiSetting': 'IMEI setting',
   'setting.navBar.prizeSetting': 'prize setting',
