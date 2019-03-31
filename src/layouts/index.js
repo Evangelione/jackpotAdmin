@@ -40,6 +40,10 @@ class BasicLayout extends Component {
     router.push(key);
   };
 
+  logout = () => {
+    router.push('/login');
+  };
+
   render() {
     const { global: { currentLink }, location: { pathname } } = this.props;
     return (
@@ -81,6 +85,8 @@ class BasicLayout extends Component {
           </Sider>
           <Layout>
             <Header style={{ background: '#fff', padding: 0, textAlign: 'right' }}>
+              <div style={{ display: 'inline-block', marginRight: 15, cursor: 'pointer' }} onClick={this.logout}>退出登录
+              </div>
               <SelectLang/>
             </Header>
             <Content style={{ margin: '0 16px' }}>

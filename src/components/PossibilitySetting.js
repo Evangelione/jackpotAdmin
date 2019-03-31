@@ -120,7 +120,7 @@ class PossibilitySetting extends Component {
             id: this.props.id,
           },
         }).then(() => {
-          let detail = this.serialization(this.props.detail);
+          let detail = this.serialization(this.props.detail.setup);
           this.setState({
             detail,
             phoneQuantity: detail.length + '',

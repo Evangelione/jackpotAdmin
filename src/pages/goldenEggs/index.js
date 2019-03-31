@@ -41,8 +41,6 @@ class Index extends Component {
     },
   }, {
     title: <FormattedMessage id="goldenEggs.list.table.redeemQRCode"/>,
-    dataIndex: 'address4',
-    key: 'address4',
     render: (text, record) => {
       return <QRCode value={`${this.props.bigWheel.activityUrl}/cash?activityId=${record.id}`}/>;
     },

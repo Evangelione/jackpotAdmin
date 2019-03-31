@@ -3,6 +3,7 @@ import { Table, Button, Pagination, Input, Select, Modal, message } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
 import { api } from '@/common/constant';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 
 const Option = Select.Option;
 const confirm = Modal.confirm;
@@ -23,69 +24,68 @@ class ActivityData extends Component {
     postCode: '',
   };
   columns = [{
-    title: 'IMEI',
+    title: <FormattedMessage id="activity.data.table.imei"/>,
     dataIndex: 'imei',
     key: 'imei',
   }, {
-    title: '手机号',
+    title: <FormattedMessage id="activity.data.table.phone"/>,
     dataIndex: 'phone',
     key: 'phone',
   }, {
-    title: '姓名',
+    title: <FormattedMessage id="activity.data.table.name"/>,
     dataIndex: 'name',
     key: 'name',
     render: (text, record) => {
       return text || '暂无';
     },
   }, {
-    title: '地址',
+    title: <FormattedMessage id="activity.data.table.address"/>,
     dataIndex: 'address',
     key: 'address',
-    render: (text, record) => {
-      return text || '暂无';
-    },
   }, {
-    title: '奖项',
-    dataIndex: 'prize',
-    key: 'prize',
+    title: <FormattedMessage id="activity.data.table.award"/>,
     render: (text, record) => {
       return record.prize.title;
     },
   }, {
-    title: '奖品',
+    title: <FormattedMessage id="activity.data.table.prize"/>,
     dataIndex: 'prize',
     key: 'prizeId',
     render: (text, record) => {
       return record.prize.name;
     },
   }, {
-    title: '中奖时间',
+    title: <FormattedMessage id="activity.data.table.winningTime"/>,
     dataIndex: 'createtime',
     key: 'createtime',
     render: (text, record) => {
       return moment(text).format('YYYY-MM-DD HH:mm:ss');
     },
   }, {
-    title: '兑奖码',
+    title: <FormattedMessage id="activity.data.table.redeemCode"/>,
     dataIndex: 'awardCode',
     key: 'awardCode',
   }, {
-    title: '短信验证',
+    title: <FormattedMessage id="activity.data.table.SMS"/>,
     dataIndex: 'verify',
     key: 'verify',
     render: (text) => {
-      return text ? '是' : '否';
+      return text ? formatMessage({ id: 'activity.data.table.true' }) : formatMessage({ id: 'activity.data.table.false' });
     },
   }, {
-    title: '兑奖',
+    title: <FormattedMessage id="activity.data.table.Redeem"/>,
     render: (text, record) => {
       return <Button type='primary' disabled={record.status}
-                     onClick={this.showModal.bind(null, record.verify, record.id)}>Redeem</Button>;
+                     onClick={this.showModal.bind(null, record.verify, record.id)}>
+        {formatMessage({ id: 'activity.data.table.Redeem' })}
+      </Button>;
     },
   }, {
-    title: '操作',
+    title: <FormattedMessage id="activity.data.table.operation"/>,
     render: (text, record) => {
-      return <Button type='danger' onClick={this.danger.bind(null, record.id)}>删除</Button>;
+      return <Button type='danger' onClick={this.danger.bind(null, record.id)}>
+        {formatMessage({ id: 'activity.data.table.delete' })}
+      </Button>;
     },
   }];
 
@@ -107,8 +107,8 @@ class ActivityData extends Component {
 
   danger = (id) => {
     confirm({
-      title: '删除本条记录？',
-      content: '删除后数据无法恢复，确认要删除吗？',
+      title: formatMessage({ id: 'modal.delete.title' }),
+      content: formatMessage({ id: 'modal.delete.confirm' }),
       onOk: () => {
         this.props.dispatch({
           type: 'bigWheel/deleteDanger',
@@ -195,7 +195,7 @@ class ActivityData extends Component {
     console.log(e);
     const { postPhone, postCode } = this.state;
     if (!postPhone || !postCode) {
-      message.error('请填写完整信息');
+      message.error(formatMessage({ id: 'complete.information' }));
       return false;
     }
     this.props.dispatch({
@@ -254,7 +254,7 @@ class ActivityData extends Component {
 
   getCode = () => {
     if (!this.state.postPhone) {
-      message.error('请输入手机号');
+      message.error(formatMessage({ id: 'enter.phone' }));
       return false;
     }
 
@@ -291,18 +291,22 @@ class ActivityData extends Component {
     return (
       <div>
         <div style={{ marginBottom: 20 }}>
-          IMEI码：<Input style={{ width: 160, marginRight: 20 }} value={imei}
+          {formatMessage({ id: 'activity.data.table.imei' })}：<Input style={{ width: 160, marginRight: 20 }} value={imei}
                        onChange={this.changeField.bind(null, 'imei')}/>
-          手机号：<Input style={{ width: 160, marginRight: 20 }} value={phone}
+          {formatMessage({ id: 'activity.data.table.phone' })}：<Input style={{ width: 160, marginRight: 20 }} value={phone}
                      onChange={this.changeField.bind(null, 'phone')}/>
-          姓名：<Input style={{ width: 160, marginRight: 20 }} value={name}
+          {formatMessage({ id: 'activity.data.table.name' })}：<Input style={{ width: 160, marginRight: 20 }} value={name}
                     onChange={this.changeField.bind(null, 'name')}/>
-          奖项：<Select style={{ width: 160 }} value={prize} onChange={this.selectPrize}>
+          {formatMessage({ id: 'activity.data.table.award' })}：<Select style={{ width: 160 }} value={prize} onChange={this.selectPrize}>
           {this.mapPrizeList()}
         </Select>
           <div style={{ float: 'right' }}>
-            <Button type='primary' style={{ marginRight: 10 }} onClick={this.searchDetailList}>搜索</Button>
-            <Button onClick={this.exportImei}>导出</Button>
+            <Button type='primary' style={{ marginRight: 10 }} onClick={this.searchDetailList}>
+              {formatMessage({ id: 'btn.search' })}
+            </Button>
+            <Button onClick={this.exportImei}>
+              {formatMessage({ id: 'btn.export' })}
+            </Button>
           </div>
         </div>
         <Table dataSource={activityDataList} rowKey='id' columns={this.columns} pagination={false}/>
@@ -310,7 +314,7 @@ class ActivityData extends Component {
           <Pagination current={activityDataPage} total={activityDataTotal} onChange={this.pageChange}/>
         </div>
         <Modal
-          title="兑奖"
+          title={formatMessage({ id: 'activity.data.table.Redeem' })}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}

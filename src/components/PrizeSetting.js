@@ -12,14 +12,7 @@ const { Option } = Select;
 @Form.create()
 class PrizeSetting extends Component {
   state = {
-    prizeQuantity: '2',
-    fileList: [{
-      uid: '-1',
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }],
+    prizeQuantity: '1',
   };
 
   componentDidMount() {

@@ -30,6 +30,7 @@ class OperatorModal extends Component {
   };
 
   handleOk = (e) => {
+    debugger
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         if (values.password !== values.password2) {
@@ -37,7 +38,7 @@ class OperatorModal extends Component {
           return false;
         }
         let method = 'addUser';
-        if (this.props.modify.id) {
+        if (this.props.modify) {
           method = 'updateUser';
           values.id = this.props.modify.id;
         }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Button, message } from 'antd';
 import styles from './index.less';
 import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 @connect(({ bigWheel }) => ({
   bigWheel,
@@ -14,7 +15,7 @@ class Index extends Component {
   login = () => {
     const { username, password } = this.state;
     if (!username || !password) {
-      message.error('请填写完整信息');
+      message.error(formatMessage({ id: 'complete.information' }));
       return false;
     }
     this.props.dispatch({
@@ -38,8 +39,10 @@ class Index extends Component {
         <div className={styles.loginBox}>
           <div style={{ fontSize: 28 }}>vivo抽奖系统管理后台</div>
           <div className={styles.logo}/>
-          <Input placeholder='请输入账号' onChange={this.changeField.bind(null, 'username')}/>
-          <Input placeholder='请输入密码' onChange={this.changeField.bind(null, 'password')}/>
+          <Input placeholder={formatMessage({ id: 'complete.information' })}
+                 onChange={this.changeField.bind(null, 'username')}/>
+          <Input placeholder={formatMessage({ id: 'complete.information' })}
+                 onChange={this.changeField.bind(null, 'password')}/>
           <div>
             <Button onClick={this.login}>登录</Button>
           </div>

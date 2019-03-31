@@ -1,62 +1,67 @@
 import React, { Component } from 'react';
-import { Table, Button, Pagination } from 'antd';
+import { Table, Button, Pagination, Modal } from 'antd';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import { connect } from 'dva';
+import QRCode from 'qrcode.react';
+
+const confirm = Modal.confirm;
 
 @connect(({ bigWheel }) => ({
   bigWheel,
 }))
 class Index extends Component {
   columns = [{
-    title: '活动标题',
+    title: <FormattedMessage id="goldenEggs.list.table.title"/>,
     dataIndex: 'title',
     key: 'title',
   }, {
-    title: '活动链接',
+    title: <FormattedMessage id="goldenEggs.list.table.activeLink"/>,
     render: (text, record) => {
-      return `http://lottery.morefun.co.in/?activityId=${record.id}`;
+      return `${this.props.bigWheel.activityUrl}?activityId=${record.id}`;
     },
   }, {
-    title: '活动二维码',
+    title: <FormattedMessage id="goldenEggs.list.table.QRCode"/>,
     dataIndex: 'address',
     key: 'address',
-    render: () => {
-      return <img style={{ width: 100 }}
-                  src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553164905192&di=fec4251d2bf3c91f8400ebcd3836d703&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F48%2F34%2F7657442144c5df2.jpg'
-                  alt=""/>;
+    render: (text, record) => {
+      return <QRCode value={`${this.props.bigWheel.activityUrl}?activityId=${record.id}`}/>;
     },
   }, {
-    title: '活动时间',
+    title: <FormattedMessage id="goldenEggs.list.table.activeDate"/>,
     render: (text, record) => {
       let start = record.createtime.substr(0, 10);
       let end = record.endtime.substr(0, 10);
       return `${start} - ${end}`;
     },
   }, {
-    title: '兑奖链接',
-    dataIndex: 'address3',
-    key: 'address3',
-  }, {
-    title: '兑奖二维码',
-    dataIndex: 'address4',
-    key: 'address4',
-    render: () => {
-      return <img style={{ width: 100 }}
-                  src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553164905192&di=fec4251d2bf3c91f8400ebcd3836d703&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F48%2F34%2F7657442144c5df2.jpg'
-                  alt=""/>;
-    },
-  }, {
-    title: '活动数据',
+    title: <FormattedMessage id="goldenEggs.list.table.redeemLink"/>,
     render: (text, record) => {
-      return <Button type='primary'>查看详情</Button>;
+      return `${this.props.bigWheel.activityUrl}/cash?activityId=${record.id}`;
     },
   }, {
-    title: '操作',
+    title: <FormattedMessage id="goldenEggs.list.table.redeemQRCode"/>,
+    render: (text, record) => {
+      return <QRCode value={`${this.props.bigWheel.activityUrl}/cash?activityId=${record.id}`}/>;
+    },
+  }, {
+    title: <FormattedMessage id="goldenEggs.list.table.activeData"/>,
+    render: (text, record) => {
+      return <Button type='primary' onClick={this.goActivityData.bind(null, record.id)}>
+        <FormattedMessage id="goldenEggs.list.table.viewDetail"/>
+      </Button>;
+    },
+  }, {
+    title: <FormattedMessage id="goldenEggs.list.table.operating"/>,
     render: (text, record) => {
       return <>
-        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail}>设置</Button>
+        <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>
+          <FormattedMessage id="goldenEggs.list.table.setting"/>
+        </Button>
         <br/>
-        <Button type='danger'>删除</Button>
+        <Button type='danger' onClick={this.danger.bind(null, record.id)}>
+          <FormattedMessage id="goldenEggs.list.table.delete"/>
+        </Button>
       </>;
     },
   }];
@@ -69,6 +74,38 @@ class Index extends Component {
       },
     });
   }
+
+  danger = (id) => {
+    confirm({
+      title: formatMessage({ id: 'modal.delete.title' }),
+      content: formatMessage({ id: 'modal.delete.confirm' }),
+      onOk: () => {
+        this.props.dispatch({
+          type: 'bigWheel/deleteActivityData',
+          payload: {
+            id,
+          },
+        }).then(() => {
+          this.props.dispatch({
+            type: 'bigWheel/fetchBigWheelList',
+            payload: {
+              category: 2,
+            },
+          });
+        });
+      },
+    });
+  };
+
+  goActivityData = (id) => {
+    router.push({
+      pathname: '/activityData',
+      query: {
+        category: 2,
+        id,
+      },
+    });
+  };
 
   createActivity = () => {
     this.props.dispatch({
@@ -86,8 +123,8 @@ class Index extends Component {
     });
   };
 
-  goDetail = () => {
-    router.push('/bigWheelSetting');
+  goDetail = (id) => {
+    router.push({ pathname: '/bigWheelSetting', query: { id } });
   };
 
   bigWheelPageChange = (page) => {
@@ -95,6 +132,7 @@ class Index extends Component {
       type: 'bigWheel/fetchBigWheelList',
       payload: {
         page,
+        category: 2,
       },
     });
   };
@@ -104,7 +142,9 @@ class Index extends Component {
     return (
       <div>
         <div style={{ textAlign: 'right', marginBottom: 20 }}>
-          <Button type='primary' size='large' onClick={this.createActivity}>创建活动</Button>
+          <Button type='primary' size='large' onClick={this.createActivity}>
+            <FormattedMessage id="goldenEggs.list.createActive"/>
+          </Button>
         </div>
         <Table columns={this.columns} dataSource={bigWheelList} rowKey='id' pagination={false}/>
         <div style={{ textAlign: 'center', marginTop: 20 }}>

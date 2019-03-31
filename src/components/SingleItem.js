@@ -32,7 +32,7 @@ class SingleItem extends Component {
       this.setState({
         fileList: [{
           uid: '-1',
-          name: 'xxx.png',
+          name: item.image,
           status: 'done',
           url: item.image,
           thumbUrl: item.image,

@@ -12,7 +12,7 @@ const strConfig = {
   rules: [{ type: 'string', required: true, message: 'Please select time!' }],
 };
 const timeConfig = {
-  rules: [{ type: 'object', required: true, message: '请选择时间' }],
+  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
 };
 
 @connect(({ bigWheel }) => ({
