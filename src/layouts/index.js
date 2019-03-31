@@ -41,6 +41,7 @@ class BasicLayout extends Component {
   };
 
   logout = () => {
+    localStorage.removeItem('tokenAdmin')
     router.push('/login');
   };
 

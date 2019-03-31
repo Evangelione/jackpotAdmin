@@ -8,5 +8,8 @@ export function deleteGlobalImei(id) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }

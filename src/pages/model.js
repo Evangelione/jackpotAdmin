@@ -1,5 +1,6 @@
 import * as services from './services';
 import { message } from 'antd';
+import router from 'umi/router';
 
 export default {
   namespace: 'bigWheel',
@@ -173,11 +174,16 @@ export default {
         message.error(data.msg);
     },
     * loginAdmin({ payload: { username, password } }, { call, put }) {
-      const data = yield call(services.loginAdmin, username, password);
-      parseInt(data.code, 10) === 1 ?
-        message.success(data.msg)
-        :
+      const { data } = yield call(services.loginAdmin, username, password);
+      if (parseInt(data.code, 10) === 1) {
+        localStorage.setItem('tokenAdmin', data.data.token);
+        router.push({
+          pathname: '/',
+        });
+        message.success(data.msg);
+      } else {
         message.error(data.msg);
+      }
     },
     * lotteryRedeem({ payload: { id } }, { call, put }) {
       const { data } = yield call(services.lotteryRedeem, id);

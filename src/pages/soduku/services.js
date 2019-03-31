@@ -5,6 +5,9 @@ export function fetchSodukuList(page, category) {
   return request(`${api}/admin/activity/list?pageNum=${page}&pageSize=${PAGESIZE}&category=${category}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -19,5 +22,8 @@ export function updateUser({ name, username, password, auth, id }) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }

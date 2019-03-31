@@ -5,6 +5,9 @@ export function fetchBigWheelList(page, category) {
   return request(`${api}/admin/activity/list?pageNum=${page}&pageSize=${PAGESIZE}&category=${category}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -15,6 +18,9 @@ export function addActivity(category) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -29,6 +35,9 @@ export function updateUser({ name, username, password, auth, id }) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -37,6 +46,9 @@ export function fetchActivityData(page, id, imei, phone, name, prize) {
   return request(`${api}/admin/activity/user?pageNum=${page}&pageSize=${PAGESIZE}&activityId=${id}&imei=${imei}&phone=${phone}&name=${name}&prizeId=${prize}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -44,6 +56,9 @@ export function fetchImei(page) {
   return request(`${api}/admin/imei/list?pageNum=${page}&pageSize=${PAGESIZE}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -51,6 +66,9 @@ export function fetchPageSetupDetail(id) {
   return request(`${api}/admin/activity?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -58,6 +76,9 @@ export function fetchIMeiDetail(id) {
   return request(`${api}/admin/activity/imei/detail?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -65,6 +86,9 @@ export function fetchprizeDetail(id) {
   return request(`${api}/admin/activity/prize/detail?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -72,6 +96,9 @@ export function fetchprobabilityDetail(id) {
   return request(`${api}/admin/activity/setup/detail?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -84,6 +111,9 @@ export function upDatePageSetup(form) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -93,6 +123,7 @@ export function upDatePrizeList(json) {
     credentials: 'omit',
     headers: {
       'Content-Type': 'application/json',
+      token: localStorage.getItem('tokenAdmin'),
     },
     body: JSON.stringify(json),
   });
@@ -104,6 +135,7 @@ export function upDateProbability(json) {
     credentials: 'omit',
     headers: {
       'Content-Type': 'application/json',
+      token: localStorage.getItem('tokenAdmin'),
     },
     body: JSON.stringify(json),
   });
@@ -117,6 +149,9 @@ export function upDateProbabilityNormal(id, count) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -129,6 +164,9 @@ export function upDateIMei(id, type, file) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -136,6 +174,9 @@ export function fetchPrizeList(id) {
   return request(`${api}/admin/activity/prize/list?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -143,6 +184,9 @@ export function fetchPhoneModal() {
   return request(`${api}/admin/imei/name/list`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -153,6 +197,9 @@ export function deleteDanger(id) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -163,6 +210,9 @@ export function deleteActivityData(id) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -174,6 +224,9 @@ export function loginAdmin(username, password) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -184,6 +237,9 @@ export function lotteryRedeem(id) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -195,5 +251,8 @@ export function getCode(phone, type) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }

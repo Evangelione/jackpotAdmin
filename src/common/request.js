@@ -1,18 +1,18 @@
-import fetch from 'dva/fetch'
-import router from 'umi/router'
+import fetch from 'dva/fetch';
+import router from 'umi/router';
 
 function parseJSON(response) {
-  return response.json()
+  return response.json();
 }
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response
+    return response;
   }
 
-  const error = new Error(response.statusText)
-  error.response = response
-  throw error
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
 }
 
 /**
@@ -31,24 +31,19 @@ export default function request(url, options) {
   // const data = await parseJSON(response)
   //
   // return data
-  let opt = options || {}
-  return fetch(url, {credentials: 'include', ...opt})
+  let opt = options || {};
+  return fetch(url, { credentials: 'include', ...opt })
     .then(checkStatus)
     .then(parseJSON)
     .then(data => {
-      if (data.code === -1) {
+      if (data.msg === 'token异常') {
         router.push({
           pathname: '/login',
-        })
-        return {data}
-      } else if (data.code === -2) {
-        router.push({
-          pathname: '/admin',
-        })
-        return {data}
+        });
+        return { data };
       } else {
-        return {data}
+        return { data };
       }
     })
-    .catch(err => ({err}))
+    .catch(err => ({ err }));
 }

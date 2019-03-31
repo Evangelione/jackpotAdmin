@@ -5,6 +5,9 @@ export function fetchUserList(page, searchKeyWord) {
   return request(`${api}/admin/user/list?pageNum=${page}&pageSize=${PAGESIZE}&keywords=${searchKeyWord}`, {
     method: 'GET',
     credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -18,6 +21,9 @@ export function addUser({ name, username, password, auth }) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
 
@@ -32,5 +38,8 @@ export function updateUser({ name, username, password, auth, id }) {
     method: 'POST',
     credentials: 'omit',
     body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
   });
 }
