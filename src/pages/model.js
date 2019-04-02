@@ -22,6 +22,7 @@ export default {
     prizeList: [],
     phoneModalList: [],
     activityUrl: '',
+    redeemKey: '',
   },
 
   subscriptions: {
@@ -185,8 +186,8 @@ export default {
         message.error(data.msg);
       }
     },
-    * lotteryRedeem({ payload: { id } }, { call, put }) {
-      const { data } = yield call(services.lotteryRedeem, id);
+    * lotteryRedeem({ payload: { id, phone, code, redeemKey } }, { call, put }) {
+      const { data } = yield call(services.lotteryRedeem, id, phone, code, redeemKey);
       parseInt(data.code, 10) === 1 ?
         message.success(data.msg)
         :
@@ -194,10 +195,20 @@ export default {
     },
     * getCode({ payload: { phone, type } }, { call, put }) {
       const { data } = yield call(services.getCode, phone, type);
-      parseInt(data.code, 10) === 1 ?
-        message.success(data.msg)
-        :
+      if (parseInt(data.code, 10) === 1) {
+        if (type === 'redeem') {
+          yield put({
+            type: 'save',
+            payload: {
+              redeemKey: data.data.key,
+            },
+          });
+        } else {
+          message.error(data.msg);
+        }
+      } else {
         message.error(data.msg);
+      }
     },
 
   },

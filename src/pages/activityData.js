@@ -201,12 +201,20 @@ class ActivityData extends Component {
     this.props.dispatch({
       type: 'bigWheel/lotteryRedeem',
       payload: {
-        phone: postPhone,
+        phone: this.state.postBeforeStr.substr(1) + postPhone,
         code: postCode,
+        redeemKey: this.props.bigWheel.redeemKey,
+        id: this.props.location.query.id,
       },
     }).then(() => {
       this.setState({
         visible: false,
+      });
+      this.props.dispatch({
+        type: 'bigWheel/save',
+        payload: {
+          redeemKey: '',
+        },
       });
     });
 
@@ -261,7 +269,7 @@ class ActivityData extends Component {
     this.props.dispatch({
       type: 'bigWheel/getCode',
       payload: {
-        phone: this.state.postPhone,
+        phone: this.state.postBeforeStr.substr(1) + this.state.postPhone,
         type: 'redeem',
       },
     });
@@ -291,13 +299,17 @@ class ActivityData extends Component {
     return (
       <div>
         <div style={{ marginBottom: 20 }}>
-          {formatMessage({ id: 'activity.data.table.imei' })}：<Input style={{ width: 160, marginRight: 20 }} value={imei}
-                       onChange={this.changeField.bind(null, 'imei')}/>
-          {formatMessage({ id: 'activity.data.table.phone' })}：<Input style={{ width: 160, marginRight: 20 }} value={phone}
-                     onChange={this.changeField.bind(null, 'phone')}/>
-          {formatMessage({ id: 'activity.data.table.name' })}：<Input style={{ width: 160, marginRight: 20 }} value={name}
-                    onChange={this.changeField.bind(null, 'name')}/>
-          {formatMessage({ id: 'activity.data.table.award' })}：<Select style={{ width: 160 }} value={prize} onChange={this.selectPrize}>
+          {formatMessage({ id: 'activity.data.table.imei' })}：<Input style={{ width: 160, marginRight: 20 }}
+                                                                     value={imei}
+                                                                     onChange={this.changeField.bind(null, 'imei')}/>
+          {formatMessage({ id: 'activity.data.table.phone' })}：<Input style={{ width: 160, marginRight: 20 }}
+                                                                      value={phone}
+                                                                      onChange={this.changeField.bind(null, 'phone')}/>
+          {formatMessage({ id: 'activity.data.table.name' })}：<Input style={{ width: 160, marginRight: 20 }}
+                                                                     value={name}
+                                                                     onChange={this.changeField.bind(null, 'name')}/>
+          {formatMessage({ id: 'activity.data.table.award' })}：<Select style={{ width: 160 }} value={prize}
+                                                                       onChange={this.selectPrize}>
           {this.mapPrizeList()}
         </Select>
           <div style={{ float: 'right' }}>
@@ -318,6 +330,7 @@ class ActivityData extends Component {
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          destroyOnClose={true}
         >
           <div style={{ padding: '10px 50px' }}>
             <Input addonBefore={selectBefore} style={{ marginBottom: 20 }}
