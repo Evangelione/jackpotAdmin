@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b0ed9e91-29f7-45ff-8a43-b9fca5f20eb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibilitySetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PossibilitySetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SingleModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SingleModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/activityData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/activityData.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,9 +17,30 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/common/constant.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="563">
+              <caret line="293" column="13" selection-start-line="293" selection-start-column="13" selection-end-line="293" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PossibilitySetting.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
+            <state relative-caret-position="1475">
               <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -29,10 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/SingleModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
+            <state relative-caret-position="4450">
               <caret line="180" selection-start-line="180" selection-end-line="180" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -53,7 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>prizeQuantity</find>
       <find>2</find>
       <find>pageSetup</find>
       <find>serialization</find>
@@ -71,7 +90,6 @@
       <find>router</find>
       <find>logout</find>
       <find>Get Code</find>
-      <find>codeHolder</find>
       <find>postBefore</find>
       <find>lotteryRedeem</find>
       <find>getCode</find>
@@ -81,8 +99,10 @@
       <find>id</find>
       <find>setField</find>
       <find>get</find>
-      <find>debu</find>
       <find>delete</find>
+      <find>debu</find>
+      <find>getCo</find>
+      <find>codeHolder</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,15 +159,15 @@
         <option value="$PROJECT_DIR$/.umirc.js" />
         <option value="$PROJECT_DIR$/src/pages/services.js" />
         <option value="$PROJECT_DIR$/src/pages/model.js" />
-        <option value="$PROJECT_DIR$/src/pages/activityData.js" />
         <option value="$PROJECT_DIR$/src/components/PossibilitySetting.js" />
         <option value="$PROJECT_DIR$/src/components/SingleModel.js" />
+        <option value="$PROJECT_DIR$/src/pages/activityData.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="802" />
-    <option name="y" value="177" />
+    <option name="x" value="757" />
+    <option name="y" value="209" />
     <option name="width" value="1480" />
     <option name="height" value="1063" />
   </component>
@@ -157,6 +177,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -173,19 +194,12 @@
               <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
               <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,18 +273,19 @@
       <workItem from="1554129102187" duration="935000" />
       <workItem from="1554210108212" duration="2723000" />
       <workItem from="1554214089150" duration="486000" />
-      <workItem from="1554215098783" duration="1982000" />
+      <workItem from="1554215098783" duration="2108000" />
+      <workItem from="1554220752849" duration="285000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163562000" />
+    <option name="totallyTimeSpent" value="163973000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="802" y="177" width="1480" height="1063" extended-state="0" />
+    <frame x="757" y="209" width="1480" height="1063" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2295423" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2295423" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -284,7 +299,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.25296018" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.25296018" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -665,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/constant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.umirc.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -709,19 +717,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+    <entry file="file://$PROJECT_DIR$/src/common/constant.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="206" column="36" lean-forward="true" selection-start-line="206" selection-start-column="36" selection-end-line="206" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="375">
+          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PossibilitySetting.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
+        <state relative-caret-position="1475">
           <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -731,8 +736,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SingleModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
+        <state relative-caret-position="4450">
           <caret line="180" selection-start-line="180" selection-end-line="180" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="293" column="13" selection-start-line="293" selection-start-column="13" selection-end-line="293" selection-end-column="13" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

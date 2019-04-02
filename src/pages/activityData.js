@@ -23,6 +23,8 @@ class ActivityData extends Component {
     postPhone: '',
     postCode: '',
   };
+  timer = null;
+  sec = 60;
   columns = [{
     title: <FormattedMessage id="activity.data.table.imei"/>,
     dataIndex: 'imei',
@@ -216,6 +218,13 @@ class ActivityData extends Component {
           redeemKey: '',
         },
       });
+      const { id } = this.props.location.query;
+      this.props.dispatch({
+        type: 'bigWheel/fetchActivityData',
+        payload: {
+          id,
+        },
+      });
     });
 
   };
@@ -265,7 +274,24 @@ class ActivityData extends Component {
       message.error(formatMessage({ id: 'enter.phone' }));
       return false;
     }
-
+    if (this.state.codeHolder !== 'Get Code') return false;
+    this.setState({
+      codeHolder: `${this.sec}s`,
+    });
+    this.timer = setInterval(() => {
+      this.sec -= 1;
+      this.setState({
+        codeHolder: `${this.sec}s`,
+      });
+      if (this.sec < 0) {
+        clearInterval(this.timer);
+        this.timer = null;
+        this.sec = 60;
+        this.setState({
+          codeHolder: 'Get Code',
+        });
+      }
+    }, 1000);
     this.props.dispatch({
       type: 'bigWheel/getCode',
       payload: {
