@@ -35,6 +35,7 @@ class SingleModel extends Component {
         Object.keys(this.props.form.getFieldsValue()).length && item.map((item, index) => {
           this.props.form.setFieldsValue({
             [item.prizeId + '']: item.probability,
+            ['id' + index]: item.id,
           });
           return item.prizeId;
         });
@@ -59,7 +60,7 @@ class SingleModel extends Component {
             name: values.name,
             prizeId: item,
             probability: values[item],
-            id: values.id,
+            id: values['id' + index] || '',
           };
         });
       }
@@ -159,10 +160,26 @@ class SingleModel extends Component {
           {this.mapProbability()}
         </Form.Item>
         <Form.Item
-          label='id'
+          label='id0'
           style={{display: 'none'}}
         >
-          {getFieldDecorator(`id`)(
+          {getFieldDecorator(`id0`)(
+            <Input disabled={true}/>,
+          )}
+        </Form.Item>
+        <Form.Item
+          label='id1'
+          style={{display: 'none'}}
+        >
+          {getFieldDecorator(`id1`)(
+            <Input disabled={true}/>,
+          )}
+        </Form.Item>
+        <Form.Item
+          label='id2'
+          style={{display: 'none'}}
+        >
+          {getFieldDecorator(`id2`)(
             <Input disabled={true}/>,
           )}
         </Form.Item>

@@ -61,6 +61,9 @@ class PossibilitySetting extends Component {
   };
 
   deletePhone = () => {
+    if (this.state.phoneQuantity === '1') {
+      return false;
+    }
     this.setState({
       phoneQuantity: (this.state.phoneQuantity - 0) - 1 + '',
     });
