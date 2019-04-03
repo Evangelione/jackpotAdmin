@@ -40,7 +40,7 @@ export default {
   'setting.navBar.pageSetup.turntable': 'turntable',
   'setting.navBar.pageSetup.turntable.btn': 'upload',
   'setting.navBar.pageSetup.turntable.suggest': 'Recommanded size: width  640px; height unlimted; Leaving empty is the default image.',
-  'setting.navBar.pageSetup.award': 'award-winning record',
+  'setting.navBar.pageSetup.award': 'event Description',
   'setting.navBar.pageSetup.winnersList': 'the latest winners list',
   'setting.navBar.pageSetup.winnersList.place': 'it will display on game page if the switch is on ,else it will be hiden',
   'setting.navBar.pageSetup.save': 'save',
