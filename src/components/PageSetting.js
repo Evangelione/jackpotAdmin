@@ -6,6 +6,7 @@ import reqwest from 'reqwest';
 import { api } from '@/common/constant';
 import moment from 'moment';
 import { connect } from 'dva';
+import withRouter from 'umi/withRouter'
 
 const { TextArea } = Input;
 const strConfig = {
@@ -183,6 +184,28 @@ class PageSetting extends Component {
           payload: {
             form: values,
           },
+        }).then(() => {
+          this.props.dispatch({
+            type: 'bigWheel/fetchActivityDetail',
+            payload: {
+              id: this.props.location.query.id,
+            },
+          }).then(() => {
+            const { detail } = this.props;
+            this.props.form.setFieldsValue({
+              title: detail.title,
+              // banner: detail.banner,
+              // background: detail.background,
+              // ad: detail.ad,
+              startTime: detail.starttime && moment(detail.starttime),
+              endTime: detail.endtime && moment(detail.endtime),
+              description: detail.description,
+              // pointer: detail.pointer,
+              // turntable: detail.turntable,
+              record: detail.record,
+              newest: detail.newest,
+            });
+          });
         });
       }
     });
@@ -348,4 +371,4 @@ class PageSetting extends Component {
   }
 }
 
-export default PageSetting;
+export default withRouter(PageSetting);

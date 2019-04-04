@@ -233,9 +233,9 @@ export function loginAdmin(username, password) {
 export function lotteryRedeem(id, phone, code, redeemKey) {
   let formData = new FormData();
   formData.append('id', id);
-  formData.append('phone', phone);
-  formData.append('code', code);
-  formData.append('key', redeemKey);
+  phone && formData.append('phone', phone);
+  code && formData.append('code', code);
+  redeemKey && formData.append('key', redeemKey);
   return request(`${api}/admin/activity/user/redeem`, {
     method: 'POST',
     credentials: 'omit',

@@ -87,11 +87,11 @@ class SingleModel extends Component {
     const tailFormItemLayout = {
       labelCol: {
         sm: { span: 24 },
-        md: { span: 4 },
+        md: { span: 8 },
       },
       wrapperCol: {
         sm: { span: 24 },
-        md: { span: 8 },
+        md: { span: 10 },
       },
     };
     let arr = this.props.form.getFieldValue('prizeWinner');

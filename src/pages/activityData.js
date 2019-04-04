@@ -22,6 +22,7 @@ class ActivityData extends Component {
     postBeforeStr: '+91',
     postPhone: '',
     postCode: '',
+    postId: '',
   };
   timer = null;
   sec = 60;
@@ -172,6 +173,7 @@ class ActivityData extends Component {
     if (verify) {
       this.setState({
         visible: true,
+        postId: id,
       });
     } else {
       this.props.dispatch({
@@ -206,11 +208,12 @@ class ActivityData extends Component {
         phone: this.state.postBeforeStr.substr(1) + postPhone,
         code: postCode,
         redeemKey: this.props.bigWheel.redeemKey,
-        id: this.props.location.query.id,
+        id: this.state.postId,
       },
     }).then(() => {
       this.setState({
         visible: false,
+        postId: '',
       });
       this.props.dispatch({
         type: 'bigWheel/save',

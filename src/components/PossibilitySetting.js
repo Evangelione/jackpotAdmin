@@ -4,6 +4,7 @@ import { formItemLayout } from '@/common/constant';
 import SingleModel from './SingleModel';
 import { connect } from 'dva';
 import withRouter from 'umi/withRouter';
+import { formatMessage } from 'umi-plugin-react/locale/index';
 
 const RadioGroup = Radio.Group;
 
@@ -77,11 +78,23 @@ class PossibilitySetting extends Component {
         result.push([value]);
         return false;
       }
-      if (result[result.length - 1][0].name === value.name) {
-        result[result.length - 1].push(value);
+      if (result.some((v, i) => {
+          if (value.name === result[i][0].name) {
+            result[i].push(value);
+            return true;
+          } else {
+            return false;
+          }
+        })) {
       } else {
         result.push([value]);
+
       }
+      // if (result[result.length - 1][0].name === value.name) {
+      //   result[result.length - 1].push(value);
+      // } else {
+      //   result.push([value]);
+      // }
     });
     return result;
   };
@@ -105,6 +118,10 @@ class PossibilitySetting extends Component {
       let result = [];
       for (let i = 0; i < phoneQuantity - 0; i++) {
         let item = this[`form${i + 1}`].getFields();
+        if (!item) {
+          message.error(formatMessage({ id: 'complete.information' }));
+          return false;
+        }
         if (result.length && item[0].name === result[result.length - 1].name) {
           message.error('不能选择相同机型');
           return false;
