@@ -112,6 +112,8 @@ class ActivityData extends Component {
     confirm({
       title: formatMessage({ id: 'modal.delete.title' }),
       content: formatMessage({ id: 'modal.delete.confirm' }),
+      okText: formatMessage({ id: 'redeem.ok' }),
+      cancelText: formatMessage({ id: 'redeem.no' }),
       onOk: () => {
         this.props.dispatch({
           type: 'bigWheel/deleteDanger',
@@ -176,20 +178,28 @@ class ActivityData extends Component {
         postId: id,
       });
     } else {
-      this.props.dispatch({
-        type: 'bigWheel/lotteryRedeem',
-        payload: {
-          id,
+      confirm({
+        title: formatMessage({ id: 'redeem.title' }),
+        content: formatMessage({ id: 'redeem.delete' }),
+        okText: formatMessage({ id: 'redeem.ok' }),
+        cancelText: formatMessage({ id: 'redeem.no' }),
+        onOk: () => {
+          this.props.dispatch({
+            type: 'bigWheel/lotteryRedeem',
+            payload: {
+              id,
+            },
+          }).then(() => {
+            const { id } = this.props.location.query;
+            this.props.dispatch({
+              type: 'bigWheel/fetchActivityData',
+              payload: {
+                id,
+                page: this.props.bigWheel.activityDataPage,
+              },
+            });
+          });
         },
-      }).then(() => {
-        const { id } = this.props.location.query;
-        this.props.dispatch({
-          type: 'bigWheel/fetchActivityData',
-          payload: {
-            id,
-            page: this.props.bigWheel.activityDataPage,
-          },
-        });
       });
     }
 
