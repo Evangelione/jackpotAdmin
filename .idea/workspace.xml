@@ -2,31 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0ed9e91-29f7-45ff-8a43-b9fca5f20eb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/locales/en-US/prizeSetting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/locales/en-US/probability.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/locales/zh-CN/prizeSetting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/locales/zh-CN/probability.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/IMEISetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IMEISetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PageSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PageSetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibilitySetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PossibilitySetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PrizeSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrizeSetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SingleItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SingleItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SingleModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SingleModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/en-US.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en-US.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/en-US/imei.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en-US/imei.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/zh-CN.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/zh-CN.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/imei.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/zh-CN/imei.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/activityData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/activityData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/administrator/components/OperatorModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/administrator/components/OperatorModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/goldenEggs/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/goldenEggs/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/services.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/soduku/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/soduku/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="178" column="58" selection-start-line="178" selection-start-column="58" selection-end-line="178" selection-end-column="58" />
+            <state relative-caret-position="280">
+              <caret line="180" column="14" lean-forward="true" selection-start-line="180" selection-start-column="14" selection-end-line="180" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -54,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-382">
-              <caret line="400" column="103" lean-forward="true" selection-start-line="400" selection-start-column="103" selection-end-line="400" selection-end-column="103" />
+            <state relative-caret-position="258">
+              <caret line="86" column="41" lean-forward="true" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -64,34 +48,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="100" column="20" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="20" />
+            <state relative-caret-position="441">
+              <caret line="231" column="21" selection-start-line="231" selection-start-column="12" selection-end-line="231" selection-end-column="21" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/locales/zh-CN.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/IMEISetting.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="3" column="25" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="25" />
+            <state relative-caret-position="230">
+              <caret line="186" column="20" lean-forward="true" selection-start-line="186" selection-start-column="20" selection-end-line="186" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,15 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>changeKV</find>
-      <find>beforeUpload</find>
-      <find>activity.data.table.Redeem</find>
-      <find>dis</find>
-      <find>redeem.title</find>
-      <find>auth</find>
-      <find>localStorage.removeItem(</find>
-      <find>tokenAdmin</find>
-      <find>authAdmin</find>
       <find>loginAdmin</find>
       <find>upload</find>
       <find>bigWheel</find>
@@ -137,7 +103,16 @@
       <find>imei.import.list.table.title</find>
       <find>Pagination</find>
       <find>FormattedMessage</find>
+      <find>user/expo</find>
+      <find>exportImei</find>
+      <find>imeiList</find>
+      <find>&lt;Pagination</find>
       <find>btn.export</find>
+      <find>activity.data.table.address</find>
+      <find>1vN</find>
+      <find>exportTotal</find>
+      <find>imei.import.1vN</find>
+      <find>imei.import.1v1.single</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,34 +150,34 @@
         <option value="$PROJECT_DIR$/src/common/constant.js" />
         <option value="$PROJECT_DIR$/.umirc.js" />
         <option value="$PROJECT_DIR$/src/components/PageSetting.js" />
-        <option value="$PROJECT_DIR$/src/pages/services.js" />
         <option value="$PROJECT_DIR$/src/pages/administrator/components/OperatorModal.js" />
-        <option value="$PROJECT_DIR$/src/pages/model.js" />
         <option value="$PROJECT_DIR$/src/layouts/index.js" />
         <option value="$PROJECT_DIR$/src/pages/goldenEggs/index.js" />
         <option value="$PROJECT_DIR$/src/pages/soduku/index.js" />
         <option value="$PROJECT_DIR$/src/pages/index.js" />
         <option value="$PROJECT_DIR$/src/components/PrizeSetting.js" />
-        <option value="$PROJECT_DIR$/src/components/IMEISetting.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US/prizeSetting.js" />
         <option value="$PROJECT_DIR$/src/locales/zh-CN/prizeSetting.js" />
         <option value="$PROJECT_DIR$/src/components/SingleItem.js" />
-        <option value="$PROJECT_DIR$/src/locales/en-US/imei.js" />
-        <option value="$PROJECT_DIR$/src/locales/zh-CN/imei.js" />
         <option value="$PROJECT_DIR$/src/locales/zh-CN/probability.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US/probability.js" />
         <option value="$PROJECT_DIR$/src/components/PossibilitySetting.js" />
         <option value="$PROJECT_DIR$/src/components/SingleModel.js" />
-        <option value="$PROJECT_DIR$/src/pages/activityData.js" />
+        <option value="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/services.js" />
+        <option value="$PROJECT_DIR$/src/pages/model.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US.js" />
         <option value="$PROJECT_DIR$/src/locales/zh-CN.js" />
-        <option value="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/activityData.js" />
+        <option value="$PROJECT_DIR$/src/locales/en-US/imei.js" />
+        <option value="$PROJECT_DIR$/src/locales/zh-CN/imei.js" />
+        <option value="$PROJECT_DIR$/src/components/IMEISetting.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="710" />
-    <option name="y" value="362" />
+    <option name="x" value="886" />
+    <option name="y" value="330" />
     <option name="width" value="1274" />
     <option name="height" value="889" />
   </component>
@@ -229,14 +204,19 @@
               <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
               <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
               <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="ImeiSetting" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -321,15 +301,17 @@
       <workItem from="1554252041045" duration="11000" />
       <workItem from="1554727334162" duration="849000" />
       <workItem from="1554789732951" duration="6828000" />
-      <workItem from="1554870427095" duration="5921000" />
+      <workItem from="1554870427095" duration="5977000" />
+      <workItem from="1554907303303" duration="16000" />
+      <workItem from="1554907354618" duration="2509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177790000" />
+    <option name="totallyTimeSpent" value="180371000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="710" y="362" width="1274" height="889" extended-state="0" />
+    <frame x="886" y="330" width="1274" height="889" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19660194" />
@@ -346,7 +328,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3642384" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3165563" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -558,23 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/constant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="267" column="24" lean-forward="true" selection-start-line="267" selection-start-column="24" selection-end-line="267" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/administrator/components/OperatorModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -591,16 +556,6 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="184" column="34" lean-forward="true" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -745,19 +700,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
+    <entry file="file://$PROJECT_DIR$/src/common/constant.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="100" column="20" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="20" />
+        <state relative-caret-position="350">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="278" column="24" lean-forward="true" selection-start-line="278" selection-start-column="24" selection-end-line="278" selection-end-column="24" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="180" column="14" lean-forward="true" selection-start-line="180" selection-start-column="14" selection-end-line="180" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/locales/zh-CN.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="655">
           <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
@@ -765,27 +737,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/IMEISetting.js">
+    <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="25" />
+        <state relative-caret-position="505">
+          <caret line="101" column="20" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-382">
-          <caret line="400" column="103" lean-forward="true" selection-start-line="400" selection-start-column="103" selection-end-line="400" selection-end-column="103" />
+        <state relative-caret-position="258">
+          <caret line="86" column="41" lean-forward="true" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="178" column="58" selection-start-line="178" selection-start-column="58" selection-end-line="178" selection-end-column="58" />
+        <state relative-caret-position="441">
+          <caret line="231" column="21" selection-start-line="231" selection-start-column="12" selection-end-line="231" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/IMEISetting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="186" column="20" lean-forward="true" selection-start-line="186" selection-start-column="20" selection-end-line="186" selection-end-column="20" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

@@ -23,6 +23,9 @@ export default {
     phoneModalList: [],
     activityUrl: '',
     redeemKey: '',
+    IMEIList: [],
+    IMEIPage: 0,
+    IMEITotal: 1,
   },
 
   subscriptions: {
@@ -218,7 +221,20 @@ export default {
         :
         message.error(data.msg);
     },
-
+    * fetchIMEIList({ payload: { page = 1 } }, { call, put }) {
+      const { data } = yield call(services.fetchIMEIList, page);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            IMEIList: data.data.list,
+            IMEIPage: page,
+            IMEITotal: data.data.total,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
   },
 
   reducers: {

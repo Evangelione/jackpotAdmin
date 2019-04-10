@@ -54,7 +54,7 @@ export default {
   'activity.data.table.imei': 'IMEI',
   'activity.data.table.phone': '手机号',
   'activity.data.table.name': '姓名',
-  'activity.data.table.address': '地址',
+  'activity.data.table.address': 'PIN code',
   'activity.data.table.award': '奖项',
   'activity.data.table.prize': '奖品',
   'activity.data.table.winningTime': '中奖时间',

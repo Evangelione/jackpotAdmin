@@ -272,3 +272,13 @@ export function cancelRedeem(id) {
     },
   });
 }
+
+export function fetchIMEIList(page) {
+  return request(`${api}/admin/activity/imei/list?pageNum=${page}&pageSize=${PAGESIZE}`, {
+    method: 'GET',
+    credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}

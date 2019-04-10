@@ -55,6 +55,7 @@ export default {
   'activity.data.table.phone': 'phone',
   'activity.data.table.name': 'name',
   'activity.data.table.address': 'address',
+  'activity.data.table.pin': 'PIN code',
   'activity.data.table.award': 'award',
   'activity.data.table.prize': 'prize',
   'activity.data.table.winningTime': 'the winning time',

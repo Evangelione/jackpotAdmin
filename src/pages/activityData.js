@@ -46,6 +46,10 @@ class ActivityData extends Component {
     dataIndex: 'address',
     key: 'address',
   }, {
+    title: <FormattedMessage id="activity.data.table.pin"/>,
+    dataIndex: 'pin',
+    key: 'pin',
+  }, {
     title: <FormattedMessage id="activity.data.table.award"/>,
     render: (text, record) => {
       return record.prize.title;
@@ -176,6 +180,11 @@ class ActivityData extends Component {
   exportImei = () => {
     const { id } = this.props.location.query;
     window.location.href = `${api}/admin/activity/user/export?activityId=${id}`;
+  };
+
+  exportTotal = () => {
+    const { id } = this.props.location.query;
+    window.location.href = `${api}/admin/activity/user/exportAll?activityId=${id}`;
   };
 
   changeField = (field, e) => {
@@ -391,8 +400,8 @@ class ActivityData extends Component {
             <Button style={{ marginRight: 10 }} onClick={this.exportImei}>
               {formatMessage({ id: 'btn.export' })}
             </Button>
-            <Button onClick={this.exportImei}>
-              {formatMessage({ id: 'btn.export' })}
+            <Button onClick={this.exportTotal}>
+              {formatMessage({ id: 'btn.exportTotal' })}
             </Button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Radio, Button, Upload, Icon, message, Table } from 'antd';
+import { Form, Radio, Button, Upload, Icon, message, Table, Pagination } from 'antd';
 import { api, formItemLayout } from '@/common/constant';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
@@ -7,17 +7,6 @@ import { connect } from 'dva';
 import moment from '@/pages/ImeiSetting';
 
 const RadioGroup = Radio.Group;
-const dataSource = [{
-  key: '1',
-  name: '胡彦斌',
-  age: 32,
-  address: '西湖区湖底公园1号',
-}, {
-  key: '2',
-  name: '胡彦祖',
-  age: 42,
-  address: '西湖区湖底公园1号',
-}];
 
 @connect(({ bigWheel }) => ({
   bigWheel,
@@ -38,7 +27,20 @@ class ImeiSetting extends Component {
     this.props.form.setFieldsValue({
       recording: this.props.detail.imei,
     });
+    this.props.dispatch({
+      type: 'bigWheel/fetchIMEIList',
+      payload: {},
+    });
   }
+
+  pageChange = (page) => {
+    this.props.dispatch({
+      type: 'bigWheel/fetchIMEIList',
+      payload: {
+        page,
+      },
+    });
+  };
 
   columns = [{
     title: formatMessage({ id: 'imei.import.list.table.title' }),
@@ -152,6 +154,7 @@ class ImeiSetting extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { IMEIList, IMEIPage, IMEITotal } = this.props.bigWheel;
     const props = {
       fileList: [...this.state.fileList],
       onRemove: this.onRemove,
@@ -166,8 +169,8 @@ class ImeiSetting extends Component {
             initialValue: this.state.radio,
           })(
             <RadioGroup onChange={this.onChange}>
-              <Radio value={0}>1v1</Radio>
-              <Radio value={1}>1vN</Radio>
+              <Radio value={0}>{formatMessage({ id: 'imei.import.1v1.single' })}</Radio>
+              <Radio value={1}>{formatMessage({ id: 'imei.import.1vN.multiple' })}</Radio>
             </RadioGroup>,
           )}
         </Form.Item>
@@ -182,7 +185,10 @@ class ImeiSetting extends Component {
             </Upload>,
           )}
         </Form.Item>
-        <Table dataSource={dataSource} columns={this.columns}/>
+        <Table dataSource={IMEIList} columns={this.columns}/>
+        <div style={{ textAlign: 'center', marginTop: 30 }}>
+          <Pagination current={IMEIPage} total={IMEITotal} onChange={this.pageChange}/>
+        </div>
         <div style={{ textAlign: 'center', marginTop: 50 }}>
           <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.IMeiSubmit}>
             {formatMessage({ id: 'imei.import.save' })}
