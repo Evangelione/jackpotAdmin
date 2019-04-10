@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Input, DatePicker, Button, Switch, message } from 'antd';
+import { Form, Input, DatePicker, Button, Switch, message, Upload, Icon } from 'antd';
 import { formItemLayout } from '@/common/constant';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
 import { api } from '@/common/constant';
 import moment from 'moment';
 import { connect } from 'dva';
-import withRouter from 'umi/withRouter'
+import withRouter from 'umi/withRouter';
 
 const { TextArea } = Input;
 const strConfig = {
@@ -32,47 +32,48 @@ class PageSetting extends Component {
 
   componentDidMount() {
     const { detail } = this.props;
-    // this.setState({
-    //   banner: [{
-    //     uid: '-1',
-    //     url: detail.banner,
-    //     thumbUrl: detail.banner,
-    //   }],
-    //   background: [{
-    //     uid: '-1',
-    //     status: 'done',
-    //     url: detail.background,
-    //     thumbUrl: detail.background,
-    //   }],
-    //   ad: [{
-    //     uid: '-1',
-    //     status: 'done',
-    //     url: detail.ad,
-    //     thumbUrl: detail.ad,
-    //   }],
-    //   pointer: [{
-    //     uid: '-1',
-    //     status: 'done',
-    //     url: detail.pointer,
-    //     thumbUrl: detail.pointer,
-    //   }],
-    //   turntable: [{
-    //     uid: '-1',
-    //     status: 'done',
-    //     url: detail.turntable,
-    //     thumbUrl: detail.turntable,
-    //   }],
-    // });
+    this.setState({
+      banner: [{
+        uid: '-1',
+        url: detail.banner,
+        thumbUrl: detail.banner,
+      }],
+      background: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.background,
+        thumbUrl: detail.background,
+      }],
+      ad: [{
+        uid: '-1',
+        status: 'done',
+        url: detail.ad,
+        thumbUrl: detail.ad,
+      }],
+      // pointer: [{
+      //   uid: '-1',
+      //   status: 'done',
+      //   url: detail.pointer,
+      //   thumbUrl: detail.pointer,
+      // }],
+      // turntable: [{
+      //   uid: '-1',
+      //   status: 'done',
+      //   url: detail.turntable,
+      //   thumbUrl: detail.turntable,
+      // }],
+    });
     this.props.form.setFieldsValue({
       title: detail.title,
-      // banner: detail.banner,
-      // background: detail.background,
-      // ad: detail.ad,
+      banner: detail.banner,
+      background: detail.background,
+      ad: detail.ad,
       startTime: detail.starttime && moment(detail.starttime),
       endTime: detail.endtime && moment(detail.endtime),
       description: detail.description,
       // pointer: detail.pointer,
       // turntable: detail.turntable,
+      prizeShow: detail.prizeShow,
       record: detail.record,
       newest: detail.newest,
     });
@@ -194,14 +195,15 @@ class PageSetting extends Component {
             const { detail } = this.props;
             this.props.form.setFieldsValue({
               title: detail.title,
-              // banner: detail.banner,
-              // background: detail.background,
-              // ad: detail.ad,
+              banner: detail.banner,
+              background: detail.background,
+              ad: detail.ad,
               startTime: detail.starttime && moment(detail.starttime),
               endTime: detail.endtime && moment(detail.endtime),
               description: detail.description,
               // pointer: detail.pointer,
               // turntable: detail.turntable,
+              prizeShow: detail.prizeShow,
               record: detail.record,
               newest: detail.newest,
             });
@@ -213,7 +215,7 @@ class PageSetting extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    // const { uploading } = this.state;
+    const { uploading } = this.state;
     return (
       <Form {...formItemLayout} >
         <Form.Item
@@ -225,54 +227,54 @@ class PageSetting extends Component {
             })}/>,
           )}
         </Form.Item>
-        {/*<Form.Item*/}
-        {/*label={<FormattedMessage id="setting.navBar.pageSetup.kv"/>}*/}
-        {/*>*/}
-        {/*{getFieldDecorator('banner')(*/}
-        {/*<Upload*/}
-        {/*listType='picture'*/}
-        {/*loading={uploading}*/}
-        {/*fileList={this.state.banner}*/}
-        {/*onRemove={this.onRemove.bind(null, 'banner')}*/}
-        {/*beforeUpload={this.beforeUpload.bind(null, 'banner')}>*/}
-        {/*<Button>*/}
-        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>*/}
-        {/*</Button>*/}
-        {/*</Upload>,*/}
-        {/*)}*/}
-        {/*</Form.Item>*/}
-        {/*<Form.Item*/}
-        {/*label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}*/}
-        {/*>*/}
-        {/*{getFieldDecorator('background')(*/}
-        {/*<Upload*/}
-        {/*listType='picture'*/}
-        {/*loading={uploading}*/}
-        {/*fileList={this.state.background}*/}
-        {/*onRemove={this.onRemove.bind(null, 'background')}*/}
-        {/*beforeUpload={this.beforeUpload.bind(null, 'background')}>*/}
-        {/*<Button>*/}
-        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>*/}
-        {/*</Button>*/}
-        {/*</Upload>,*/}
-        {/*)}*/}
-        {/*</Form.Item>*/}
-        {/*<Form.Item*/}
-        {/*label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}*/}
-        {/*>*/}
-        {/*{getFieldDecorator('ad')(*/}
-        {/*<Upload*/}
-        {/*listType='picture'*/}
-        {/*loading={uploading}*/}
-        {/*fileList={this.state.ad}*/}
-        {/*onRemove={this.onRemove.bind(null, 'ad')}*/}
-        {/*beforeUpload={this.beforeUpload.bind(null, 'ad')}>*/}
-        {/*<Button>*/}
-        {/*<Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>*/}
-        {/*</Button>*/}
-        {/*</Upload>,*/}
-        {/*)}*/}
-        {/*</Form.Item>*/}
+        <Form.Item
+          label={<FormattedMessage id="setting.navBar.pageSetup.kv"/>}
+        >
+          {getFieldDecorator('banner')(
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.banner}
+              onRemove={this.onRemove.bind(null, 'banner')}
+              beforeUpload={this.beforeUpload.bind(null, 'banner')}>
+              <Button>
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>
+              </Button>
+            </Upload>,
+          )}
+        </Form.Item>
+        <Form.Item
+          label={<FormattedMessage id="setting.navBar.pageSetup.bg"/>}
+        >
+          {getFieldDecorator('background')(
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.background}
+              onRemove={this.onRemove.bind(null, 'background')}
+              beforeUpload={this.beforeUpload.bind(null, 'background')}>
+              <Button>
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>
+              </Button>
+            </Upload>,
+          )}
+        </Form.Item>
+        <Form.Item
+          label={<FormattedMessage id="setting.navBar.pageSetup.banner"/>}
+        >
+          {getFieldDecorator('ad')(
+            <Upload
+              listType='picture'
+              loading={uploading}
+              fileList={this.state.ad}
+              onRemove={this.onRemove.bind(null, 'ad')}
+              beforeUpload={this.beforeUpload.bind(null, 'ad')}>
+              <Button>
+                <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>
+              </Button>
+            </Upload>,
+          )}
+        </Form.Item>
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.start"/>}
         >
@@ -335,6 +337,13 @@ class PageSetting extends Component {
         {/*</Upload>,*/}
         {/*)}*/}
         {/*</Form.Item>*/}
+        <Form.Item
+          label={<FormattedMessage id="setting.navBar.pageSetup.prizeList"/>}
+        >
+          {getFieldDecorator('prizeShow', { valuePropName: 'checked', initialValue: false })(
+            <Switch/>,
+          )}
+        </Form.Item>
         <Form.Item
           label={<FormattedMessage id="setting.navBar.pageSetup.award"/>}
         >

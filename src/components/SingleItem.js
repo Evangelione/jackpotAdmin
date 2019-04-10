@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Divider, Form, Icon, Input, message, Switch, Upload } from 'antd';
 import { api, formItemLayout } from '@/common/constant';
+import { formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
 
 const { TextArea } = Input;
 
 const strConfig = {
-  rules: [{ required: true, message: '必填项!' }],
+  rules: [{ required: true, message: 'required!' }],
 };
 
 const objConfig = {
-  rules: [{ required: true, message: '必填项!' }],
+  rules: [{ required: true, message: 'required!' }],
 };
 // {
 //   uid: '-1',
@@ -132,9 +133,9 @@ class SingleItem extends Component {
     };
     return (
       <Form {...formItemLayout}>
-        <Divider orientation="left">{this.props.index + 1}号奖品</Divider>
+        <Divider orientation="left">{formatMessage({ id: 'prize.name' })}{this.props.index + 1}</Divider>
         <Form.Item
-          label='奖项名称'
+          label={formatMessage({ id: 'prize.awardName' })}
         >
           {getFieldDecorator('title', {
             ...strConfig,
@@ -143,7 +144,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='奖品名称'
+          label={formatMessage({ id: 'prize.prizeName' })}
         >
           {getFieldDecorator('name', {
             ...strConfig,
@@ -152,7 +153,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='中奖概率'
+          label={formatMessage({ id: 'prize.awardPro' })}
         >
           {getFieldDecorator('probability', {
             ...strConfig,
@@ -161,7 +162,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='奖品数量'
+          label={formatMessage({ id: 'prize.prize.num' })}
         >
           {getFieldDecorator('amount', {
             ...strConfig,
@@ -170,7 +171,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='每日数量'
+          label={formatMessage({ id: 'prize.daily' })}
         >
           {getFieldDecorator('dayAmount', {
             ...strConfig,
@@ -179,7 +180,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='可中次数'
+          label={formatMessage({ id: 'prize.total.time' })}
         >
           {getFieldDecorator('frequency', {
             ...strConfig,
@@ -188,20 +189,20 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='奖品图片'
+          label={formatMessage({ id: 'prize.prize.picture' })}
         >
           {getFieldDecorator('image', {
             ...objConfig,
           })(
             <Upload {...props}>
               <Button loading={this.state.uploading}>
-                <Icon type="upload"/> 上传奖品图片
+                <Icon type="upload"/> {formatMessage({ id: 'prize.prize.picture.upload' })}
               </Button>
             </Upload>,
           )}
         </Form.Item>
         <Form.Item
-          label='中奖提示语'
+          label={formatMessage({ id: 'prize.prize.tips' })}
         >
           {getFieldDecorator('description', {
             ...strConfig,
@@ -211,7 +212,7 @@ class SingleItem extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='短信验证'
+          label={formatMessage({ id: 'prize.prize.sms' })}
         >
           {getFieldDecorator('verify', { valuePropName: 'checked', initialValue: false })(
             <Switch/>,

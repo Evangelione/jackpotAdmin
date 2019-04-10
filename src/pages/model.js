@@ -178,6 +178,7 @@ export default {
       const { data } = yield call(services.loginAdmin, username, password);
       if (parseInt(data.code, 10) === 1) {
         localStorage.setItem('tokenAdmin', data.data.token);
+        localStorage.setItem('authAdmin', data.data.user.auth);
         router.push({
           pathname: '/',
         });
@@ -209,6 +210,13 @@ export default {
       } else {
         message.error(data.msg);
       }
+    },
+    * cancelRedeem({ payload: { id } }, { call }) {
+      const { data } = yield call(services.cancelRedeem, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.msg)
+        :
+        message.error(data.msg);
     },
 
   },

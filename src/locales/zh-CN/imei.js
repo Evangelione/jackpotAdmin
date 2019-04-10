@@ -7,4 +7,6 @@ export default {
   'imei.import.list.table.time': '时间',
   'imei.import.list.table.delete': '删除',
   'imei.import.list.table.operating': '操作',
+  'imei.import.1vN': '增加手机号和IMEI码关系选项',
+  'imei.import.save': '保存',
 };

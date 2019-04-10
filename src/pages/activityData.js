@@ -78,10 +78,17 @@ class ActivityData extends Component {
   }, {
     title: <FormattedMessage id="activity.data.table.Redeem"/>,
     render: (text, record) => {
-      return <Button type='primary' disabled={record.status}
-                     onClick={this.showModal.bind(null, record.verify, record.id)}>
-        {formatMessage({ id: 'activity.data.table.Redeem' })}
-      </Button>;
+      if (record.status) {
+        return <Button type='primary'
+                       onClick={this.cancelRedeem.bind(null, record.id)}>
+          {formatMessage({ id: 'redeem.cancelRedeem' })}
+        </Button>;
+      } else {
+        return <Button type='primary'
+                       onClick={this.showModal.bind(null, record.verify, record.id)}>
+          {formatMessage({ id: 'activity.data.table.Redeem' })}
+        </Button>;
+      }
     },
   }, {
     title: <FormattedMessage id="activity.data.table.operation"/>,
@@ -107,6 +114,32 @@ class ActivityData extends Component {
       },
     });
   }
+
+  cancelRedeem = (id) => {
+    confirm({
+      title: formatMessage({ id: 'activity.data.table.cancelRedeem' }),
+      content: formatMessage({ id: 'redeem.cancelContent' }),
+      okText: formatMessage({ id: 'redeem.ok' }),
+      cancelText: formatMessage({ id: 'redeem.no' }),
+      onOk: () => {
+        this.props.dispatch({
+          type: 'bigWheel/cancelRedeem',
+          payload: {
+            id,
+          },
+        }).then(() => {
+          const { id } = this.props.location.query;
+          this.props.dispatch({
+            type: 'bigWheel/fetchActivityData',
+            payload: {
+              id,
+              page: this.props.bigWheel.activityDataPage,
+            },
+          });
+        });
+      },
+    });
+  };
 
   danger = (id) => {
     confirm({
@@ -354,6 +387,9 @@ class ActivityData extends Component {
           <div style={{ float: 'right' }}>
             <Button type='primary' style={{ marginRight: 10 }} onClick={this.searchDetailList}>
               {formatMessage({ id: 'btn.search' })}
+            </Button>
+            <Button style={{ marginRight: 10 }} onClick={this.exportImei}>
+              {formatMessage({ id: 'btn.export' })}
             </Button>
             <Button onClick={this.exportImei}>
               {formatMessage({ id: 'btn.export' })}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Divider, Form, Input, Select } from 'antd';
 import { formItemLayout } from '@/common/constant';
+import { formatMessage } from 'umi-plugin-react/locale/index';
 
 const { Option } = Select;
 const CheckboxGroup = Checkbox.Group;
@@ -124,7 +125,7 @@ class SingleModel extends Component {
     return (
       <Form {...formItemLayout}>
         <Form.Item
-          label={`机型${this.props.i + 1}`}
+          label={`${formatMessage({ id: 'pro.mod' })}${this.props.i + 1}`}
         >
           {getFieldDecorator(`name`, {
             ...strConfig,
@@ -137,7 +138,7 @@ class SingleModel extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='可抽奖次数'
+          label={formatMessage({ id: 'pro.lotteryNum' })}
         >
           {getFieldDecorator(`luckyTimes`, {
             ...strConfig,
@@ -146,7 +147,7 @@ class SingleModel extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='可中奖项'
+          label={formatMessage({ id: 'pro.awards' })}
         >
           {getFieldDecorator(`prizeWinner`, {
             ...strConfig,
@@ -155,7 +156,7 @@ class SingleModel extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label='中奖概率'
+          label={formatMessage({ id: 'pro.awardPro' })}
         >
           {this.mapProbability()}
         </Form.Item>

@@ -259,3 +259,16 @@ export function getCode(phone, type) {
     },
   });
 }
+
+export function cancelRedeem(id) {
+  let formData = new FormData();
+  formData.append('id', id);
+  return request(`${api}/admin/activity/user/redeem/cancel`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}

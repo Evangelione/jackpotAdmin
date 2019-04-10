@@ -54,6 +54,9 @@ class Index extends Component {
   }, {
     title: <FormattedMessage id="goldenEggs.list.table.operating"/>,
     render: (text, record) => {
+      if (localStorage.getItem('authAdmin') === '2') {
+        return <FormattedMessage id='auth.noPermission'/>;
+      }
       return <>
         <Button type='primary' style={{ marginBottom: 5 }} onClick={this.goDetail.bind(null, record.id)}>
           <FormattedMessage id="goldenEggs.list.table.setting"/>
@@ -141,11 +144,13 @@ class Index extends Component {
     const { bigWheelList, bigWheelPage, bigWheelTotal } = this.props.bigWheel;
     return (
       <div>
-        <div style={{ textAlign: 'right', marginBottom: 20 }}>
-          <Button type='primary' size='large' onClick={this.createActivity}>
-            <FormattedMessage id="goldenEggs.list.createActive"/>
-          </Button>
-        </div>
+        {localStorage.getItem('authAdmin') !== '2' ?
+          <div style={{ textAlign: 'right', marginBottom: 20 }}>
+            <Button type='primary' size='large' onClick={this.createActivity}>
+              <FormattedMessage id="goldenEggs.list.createActive"/>
+            </Button>
+          </div> :
+          null}
         <Table columns={this.columns} dataSource={bigWheelList} rowKey='id' pagination={false}/>
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           <Pagination current={bigWheelPage} total={bigWheelTotal} onChange={this.bigWheelPageChange}/>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Select } from 'antd';
 import SingleForm from './SingleItem';
 import withRouter from 'umi/withRouter';
+import {  formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 
 const { Option } = Select;
@@ -69,7 +70,8 @@ class PrizeSetting extends Component {
   render() {
     return (
       <div>
-        <span style={{ margin: '20px 10px 20px 70px', fontSize: 16, color: 'rgba(0, 0, 0, 0.85)' }}>奖项个数：</span>
+        <span style={{ margin: '20px 10px 20px 70px', fontSize: 16, color: 'rgba(0, 0, 0, 0.85)' }}>
+          {formatMessage({ id: 'prize.num' })}：</span>
         <Select placeholder="Please select a country" value={this.state.prizeQuantity} onChange={this.changeQuantity}
                 style={{ width: 200 }}>
           <Option value="1">1</Option>
@@ -80,7 +82,9 @@ class PrizeSetting extends Component {
         </Select>
         {this.mapFormItem()}
         <div style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.prizeSubmit}>保存</Button>
+          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.prizeSubmit}>
+            {formatMessage({ id: 'prize.save' })}
+          </Button>
         </div>
       </div>
     );

@@ -1,0 +1,17 @@
+export default {
+  'prize.num': 'Number  of awards',
+  'prize.awardName': 'Award name',
+  'prize.prizeName': 'Name of the prize',
+  'prize.awardPro': 'Name of the prize',
+  'prize.prize.num': 'Name of the prize',
+  'prize.daily': 'Daily available quantity',
+  'prize.total.time': 'Total times of winning',
+  'prize.prize.picture': 'Prize picture',
+  'prize.prize.picture.upload': 'upload',
+  'prize.prize.desc': 'Recommanded size',
+  'prize.prize.desc.d': 'width  640px; height unlimted; Leaving empty is the default image.',
+  'prize.prize.tips': 'Tips of winning',
+  'prize.prize.sms': 'SMS verification',
+  'prize.save': 'save',
+  'prize.name': 'prize',
+};

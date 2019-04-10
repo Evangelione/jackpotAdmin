@@ -139,10 +139,9 @@ class OperatorModal extends Component {
               label={formatMessage({ id: 'administrator.list.table.operatingAuthorization' })}
             >
               {getFieldDecorator('auth', {
-                initialValue: '1',
+                initialValue: '2',
               })(
                 <RadioGroup onChange={this.onChange}>
-                  <Radio value='1'>{formatMessage({ id: 'administrator.list.table.check' })}</Radio>
                   <Radio value='2'>{formatMessage({ id: 'administrator.list.table.redeem' })}</Radio>
                   <Radio value='3'>{formatMessage({ id: 'administrator.list.table.administrator' })}</Radio>
                 </RadioGroup>,

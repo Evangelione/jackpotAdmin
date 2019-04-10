@@ -7,4 +7,6 @@ export default {
   'imei.import.list.table.time': 'time',
   'imei.import.list.table.delete': 'delete',
   'imei.import.list.table.operating': 'operating',
+  'imei.import.1vN': 'Mobile phone number VS IMEI code',
+  'imei.import.save': 'save',
 };

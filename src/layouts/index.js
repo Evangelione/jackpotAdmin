@@ -41,7 +41,8 @@ class BasicLayout extends Component {
   };
 
   logout = () => {
-    localStorage.removeItem('tokenAdmin')
+    localStorage.removeItem('tokenAdmin');
+    localStorage.removeItem('authAdmin');
     router.push('/login');
   };
 
@@ -75,12 +76,16 @@ class BasicLayout extends Component {
                 <Menu.Item key="/goldenEggs">
                   <FormattedMessage id="index.bread.eggFrenzy"/>
                 </Menu.Item>
-                <Menu.Item key="/imeiSetting">
-                  <FormattedMessage id="index.bread.imei"/>
-                </Menu.Item>
-                <Menu.Item key="/administrator">
-                  <FormattedMessage id="index.bread.admin"/>
-                </Menu.Item>
+                {localStorage.getItem('authAdmin') !== '2' ?
+                  <Menu.Item key="/imeiSetting">
+                    <FormattedMessage id="index.bread.imei"/>
+                  </Menu.Item> :
+                  null}
+                {localStorage.getItem('authAdmin') !== '2' ?
+                  <Menu.Item key="/administrator">
+                    <FormattedMessage id="index.bread.admin"/>
+                  </Menu.Item> :
+                  null}
               </SubMenu>
             </Menu>
           </Sider>

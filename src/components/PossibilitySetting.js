@@ -224,33 +224,35 @@ class PossibilitySetting extends Component {
         {/*</Row>*/}
         {/*<Divider/>*/}
         <div style={{ margin: '20px 10px' }}>
-          <span>活动类型：</span>
+          <span>{formatMessage({ id: 'pro.activity' })}：</span>
           <RadioGroup value={this.state.radio} onChange={this.onChange}>
-            <Radio value={0}>关联机型</Radio>
-            <Radio value={1}>正常活动</Radio>
+            <Radio value={0}>{formatMessage({ id: 'pro.model' })}</Radio>
+            <Radio value={1}>{formatMessage({ id: 'pro.normal' })}</Radio>
           </RadioGroup>,
         </div>
         {radio === 0 ?
           <div>
-            <Button type='primary' onClick={this.addPhone} style={{ margin: '20px 10px' }}>添加机型</Button>
-            <Button type='primary' onClick={this.deletePhone} style={{ margin: '20px 10px' }}>删除机型</Button>
+            <Button type='primary' onClick={this.addPhone} style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.addModel' })}</Button>
+            <Button type='primary' onClick={this.deletePhone} style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.delModel' })}</Button>
             {this.mapPhone()}
           </div>
           :
           <Form {...formItemLayout} style={{ marginTop: 30 }}>
             <Form.Item
-              label='每人总共可以抽奖次数'
+              label={formatMessage({ id: 'pro.total' })}
               {...tailFormItemLayout}
             >
               {getFieldDecorator('luckyTimes')(
                 <Input/>,
               )}
-              这个数字会在抽奖页面上显示
+              {formatMessage({ id: 'pro.desc' })}
             </Form.Item>
           </Form>
         }
         <div style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.proSubmit}>保存</Button>
+          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.proSubmit}>
+            {formatMessage({ id: 'pro.save' })}
+          </Button>
         </div>
       </div>
     );

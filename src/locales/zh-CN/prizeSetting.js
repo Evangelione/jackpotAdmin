@@ -1,0 +1,17 @@
+export default {
+  'prize.num': '奖项个数',
+  'prize.awardName': '奖项名称',
+  'prize.prizeName': '奖品名称',
+  'prize.awardPro': '中奖概率',
+  'prize.prize.num': '奖品数量',
+  'prize.daily': '每日数量',
+  'prize.total.time': '可中次数',
+  'prize.prize.picture': '奖品图片',
+  'prize.prize.picture.upload': '上传',
+  'prize.prize.desc': '建议尺寸',
+  'prize.prize.desc.d': '宽640像素，高度不限；留空即为默认图片',
+  'prize.prize.tips': '中奖提示语',
+  'prize.prize.sms': '短信验证',
+  'prize.save': '保存',
+  'prize.name': '奖品',
+};
