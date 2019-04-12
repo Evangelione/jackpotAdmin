@@ -37,12 +37,11 @@ class Index extends Component {
     return (
       <div className={styles.background}>
         <div className={styles.loginBox}>
-          <div style={{ fontSize: 28 }}>vivo抽奖系统管理后台</div>
-          <div className={styles.logo}/>
+          <div style={{ fontSize: 60 ,marginBottom: 100, fontWeight: 'bold'}}>Vivo lottery system</div>
           <Input placeholder={formatMessage({ id: 'complete.information' })}
                  onChange={this.changeField.bind(null, 'username')}/>
           <Input placeholder={formatMessage({ id: 'complete.information' })}
-                 onChange={this.changeField.bind(null, 'password')}/>
+                 onChange={this.changeField.bind(null, 'password')} type='password'/>
           <div>
             <Button onClick={this.login}>登录</Button>
           </div>

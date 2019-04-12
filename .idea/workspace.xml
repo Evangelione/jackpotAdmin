@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0ed9e91-29f7-45ff-8a43-b9fca5f20eb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/images/88242753695475743d1d3906757d6cb.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/IMEISetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IMEISetting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/services.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/zh-CN.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/index.less" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/login/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+            <state relative-caret-position="286">
+              <caret line="36" column="12" lean-forward="true" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -33,24 +32,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/model.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/login/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="75" column="67" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="67" />
+            <state relative-caret-position="275">
+              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="44" column="60" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="60" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/locales/zh-CN.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/services.js">
+        <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
-              <caret line="306" selection-start-line="306" selection-end-line="306" />
+            <state relative-caret-position="380">
+              <caret line="57" column="26" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="26" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,9 +88,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>1vN</find>
-      <find>exportTotal</find>
-      <find>imei.import.1vN</find>
       <find>imei.import.1v1.single</find>
       <find>radio</find>
       <find>admin/imei/list</find>
@@ -98,6 +115,9 @@
       <find>moment</find>
       <find>fetchImei</find>
       <find>export</find>
+      <find>background</find>
+      <find>activity.data.table.pin</find>
+      <find>activity.data.table.address</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,7 +136,6 @@
         <option value="$PROJECT_DIR$/src/locales/zh-CN/bigWheel.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US/bigWheel.js" />
         <option value="$PROJECT_DIR$/src/components/SelectLang.js" />
-        <option value="$PROJECT_DIR$/src/pages/login/index.less" />
         <option value="$PROJECT_DIR$/src/models/global.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US/soduku.js" />
         <option value="$PROJECT_DIR$/src/locales/zh-CN/soduku.js" />
@@ -126,7 +145,6 @@
         <option value="$PROJECT_DIR$/src/locales/zh-CN/administrator.js" />
         <option value="$PROJECT_DIR$/src/pages/administrator/index.js" />
         <option value="$PROJECT_DIR$/src/pages/bigWheelSetting.js" />
-        <option value="$PROJECT_DIR$/src/pages/login/index.js" />
         <option value="$PROJECT_DIR$/src/common/request.js" />
         <option value="$PROJECT_DIR$/src/services/global.js" />
         <option value="$PROJECT_DIR$/src/pages/administrator/services.js" />
@@ -148,7 +166,6 @@
         <option value="$PROJECT_DIR$/src/components/PossibilitySetting.js" />
         <option value="$PROJECT_DIR$/src/components/SingleModel.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US.js" />
-        <option value="$PROJECT_DIR$/src/locales/zh-CN.js" />
         <option value="$PROJECT_DIR$/src/pages/activityData.js" />
         <option value="$PROJECT_DIR$/src/locales/en-US/imei.js" />
         <option value="$PROJECT_DIR$/src/locales/zh-CN/imei.js" />
@@ -157,12 +174,15 @@
         <option value="$PROJECT_DIR$/src/pages/services.js" />
         <option value="$PROJECT_DIR$/src/pages/model.js" />
         <option value="$PROJECT_DIR$/src/pages/ImeiSetting/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/login/index.less" />
+        <option value="$PROJECT_DIR$/src/pages/login/index.js" />
+        <option value="$PROJECT_DIR$/src/locales/zh-CN.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="764" />
-    <option name="y" value="105" />
+    <option name="x" value="1141" />
+    <option name="y" value="128" />
     <option name="width" value="1478" />
     <option name="height" value="1107" />
   </component>
@@ -172,7 +192,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,17 +210,11 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="jackpotAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jackpotAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="ImeiSetting" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -219,16 +232,17 @@
     <property name="ts.external.directory.path" value="D:\JetBrains\WebStorm 2018.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\locales" />
-      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src" />
-      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\pages" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\assets\images" />
       <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\locales\en-US" />
       <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\locales\zh-CN" />
       <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\common" />
       <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\locales" />
+      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src" />
+      <recent name="C:\Users\leshp\Desktop\aa\jackpotAdmin\src\pages" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -285,18 +299,18 @@
       <workItem from="1554907303303" duration="16000" />
       <workItem from="1554907354618" duration="2548000" />
       <workItem from="1554990042700" duration="392000" />
-      <workItem from="1555035489747" duration="9471000" />
+      <workItem from="1555035489747" duration="9952000" />
+      <workItem from="1555056878511" duration="758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="190273000" />
+    <option name="totallyTimeSpent" value="191512000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1041" y="145" width="1478" height="1107" extended-state="0" />
-    <editor active="true" />
+    <frame x="1340" y="114" width="1478" height="1107" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -310,7 +324,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3165563" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3463515" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -348,13 +362,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="29" lean-forward="true" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SelectLang.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -375,13 +382,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/yay.jpg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/eslint/lib/rules/max-len.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -516,16 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="144" selection-start-line="144" selection-end-line="144" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -679,26 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locales/zh-CN.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="101" column="20" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/IMEISetting.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="772">
@@ -721,10 +691,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
+        <state relative-caret-position="7625">
           <caret line="306" selection-start-line="306" selection-end-line="306" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/images/88242753695475743d1d3906757d6cb.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -739,22 +722,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/login/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="176" column="7" lean-forward="true" selection-start-line="176" selection-start-column="7" selection-end-line="176" selection-end-column="7" />
+        <state relative-caret-position="286">
+          <caret line="36" column="12" lean-forward="true" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/ImeiSetting/index.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/login/index.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+        <state relative-caret-position="275">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/activityData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="44" column="60" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="60" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locales/en-US.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locales/zh-CN.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
