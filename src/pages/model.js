@@ -26,6 +26,9 @@ export default {
     IMEIList: [],
     IMEIPage: 0,
     IMEITotal: 1,
+    activityOption: [],
+    modalOption: [],
+    areaOption: [],
   },
 
   subscriptions: {
@@ -70,8 +73,8 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchImei({ payload: { page = 1 } }, { call, put }) {
-      const { data } = yield call(services.fetchImei, page);
+    * fetchImei({ payload: { page = 1, id = '', goodName = '', area = '', start = '', end = '' } }, { call, put }) {
+      const { data } = yield call(services.fetchImei, page, id, goodName, area, start, end);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -221,8 +224,8 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchIMEIList({ payload: { page = 1 } }, { call, put }) {
-      const { data } = yield call(services.fetchIMEIList, page);
+    * fetchIMEIList({ payload: { page = 1, id } }, { call, put }) {
+      const { data } = yield call(services.fetchIMEIList, page, id);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -230,6 +233,32 @@ export default {
             IMEIList: data.data.list,
             IMEIPage: page,
             IMEITotal: data.data.total,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * fetchGlobalOption({ payload }, { call, put }) {
+      const data1 = yield call(services.fetchActivitySelect);
+      const data2 = yield call(services.fetchModalSelect);
+      parseInt(data1.data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            activityOption: data1.data.data,
+            modalOption: data2.data.data,
+          },
+        })
+        :
+        message.error(data1.data.msg);
+    },
+    * fetchAreaSelect({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchAreaSelect, id);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            areaOption: data.data,
           },
         })
         :

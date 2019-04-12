@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Form, Radio, Button, Upload, Icon, message, Table, Pagination } from 'antd';
+import { Form, Radio, Button, Upload, Icon, message, Table, Pagination, Modal } from 'antd';
 import { api, formItemLayout } from '@/common/constant';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import reqwest from 'reqwest';
 import { connect } from 'dva';
-import moment from '@/pages/ImeiSetting';
+import moment from 'moment';
 
+const confirm = Modal.confirm;
 const RadioGroup = Radio.Group;
 
-@connect(({ bigWheel }) => ({
+@connect(({ bigWheel, loading }) => ({
   bigWheel,
+  loading: loading.models.bigWheel,
 }))
 @Form.create()
 class ImeiSetting extends Component {
@@ -22,14 +24,16 @@ class ImeiSetting extends Component {
   componentDidMount() {
     console.log(this.props.detail);
     this.setState({
-      radio: this.props.detail.imei,
+      radio: this.props.detail.multiPhone,
     });
     this.props.form.setFieldsValue({
-      recording: this.props.detail.imei,
+      recording: this.props.detail.multiPhone,
     });
     this.props.dispatch({
       type: 'bigWheel/fetchIMEIList',
-      payload: {},
+      payload: {
+        id: this.props.id,
+      },
     });
   }
 
@@ -55,7 +59,7 @@ class ImeiSetting extends Component {
     dataIndex: 'createtime',
     key: 'createtime',
     render: (text, record) => {
-      return text && moment(text).format('YYYY-MM-DD HH:mm:ss');
+      return moment(text).format('YYYY-MM-DD HH:mm:ss');
     },
   }, {
     title: formatMessage({ id: 'imei.import.list.table.delete' }),
@@ -67,16 +71,24 @@ class ImeiSetting extends Component {
   }];
 
   delete = (id) => {
-    this.props.dispatch({
-      type: 'global/deleteGlobalImei',
-      payload: {
-        id,
+    confirm({
+      title: formatMessage({ id: 'modal.delete.title' }),
+      content: formatMessage({ id: 'modal.delete.confirm' }),
+      onOk: () => {
+        this.props.dispatch({
+          type: 'global/deleteGlobalImei',
+          payload: {
+            id,
+          },
+        }).then(() => {
+          this.props.dispatch({
+            type: 'bigWheel/fetchIMEIList',
+            payload: {
+              id: this.props.id,
+            },
+          });
+        });
       },
-    }).then(() => {
-      this.props.dispatch({
-        type: 'bigWheel/fetchImei',
-        payload: {},
-      });
     });
   };
 
@@ -87,7 +99,6 @@ class ImeiSetting extends Component {
   };
 
   IMeiSubmit = () => {
-    debugger;
     this.props.dispatch({
       type: 'bigWheel/upDateIMei',
       payload: {
@@ -95,6 +106,13 @@ class ImeiSetting extends Component {
         type: this.state.radio,
         file: this.state.radio === 0 ? '' : this.state.file,
       },
+    }).then(() => {
+      this.props.dispatch({
+        type: 'bigWheel/fetchIMEIList',
+        payload: {
+          id: this.props.id,
+        },
+      });
     });
   };
 
@@ -159,6 +177,7 @@ class ImeiSetting extends Component {
       fileList: [...this.state.fileList],
       onRemove: this.onRemove,
       beforeUpload: this.beforeUpload.bind(null, 'banner'),
+      loading: this.props.loading,
     };
     return (
       <Form {...formItemLayout}>
@@ -169,10 +188,11 @@ class ImeiSetting extends Component {
             initialValue: this.state.radio,
           })(
             <RadioGroup onChange={this.onChange}>
-              <Radio value={0}>{formatMessage({ id: 'imei.import.1v1.single' })}</Radio>
-              <Radio value={1}>{formatMessage({ id: 'imei.import.1vN.multiple' })}</Radio>
+              <Radio value={true}>{formatMessage({ id: 'imei.import.1v1.single' })}</Radio>
+              <Radio value={false}>{formatMessage({ id: 'imei.import.1vN.multiple' })}</Radio>
             </RadioGroup>,
           )}
+
         </Form.Item>
         <Form.Item
           label={formatMessage({ id: 'imei.import.title' })}
@@ -185,12 +205,13 @@ class ImeiSetting extends Component {
             </Upload>,
           )}
         </Form.Item>
-        <Table dataSource={IMEIList} columns={this.columns}/>
+        <Table dataSource={IMEIList} columns={this.columns} rowKey='id'/>
         <div style={{ textAlign: 'center', marginTop: 30 }}>
           <Pagination current={IMEIPage} total={IMEITotal} onChange={this.pageChange}/>
         </div>
-        <div style={{ textAlign: 'center', marginTop: 50 }}>
-          <Button type='primary' htmlType='submit' style={{ marginRight: 10 }} onClick={this.IMeiSubmit}>
+        <div style={{ textAlign: 'center', marginTop: 20 }}>
+          <Button type='primary' htmlType='submit' loading={this.props.loading} style={{ marginRight: 10 }}
+                  onClick={this.IMeiSubmit}>
             {formatMessage({ id: 'imei.import.save' })}
           </Button>
         </div>

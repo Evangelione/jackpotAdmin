@@ -4,8 +4,8 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import reqwest from 'reqwest';
 import { api } from '@/common/constant';
+import moment from 'moment';
 
-const { RangePicker } = DatePicker;
 const Option = Select.Option;
 
 @connect(({ bigWheel }) => ({
@@ -15,6 +15,31 @@ class Index extends Component {
   state = {
     fileList: [],
     uploading: false,
+    activityId: '',
+    goodName: '',
+    area: '',
+    start: null,
+    end: null,
+  };
+
+  search = () => {
+    this.props.dispatch({
+      type: 'bigWheel/fetchImei',
+      payload: {
+        id: this.state.activityId,
+        goodName: this.state.goodName,
+        area: this.state.area,
+        start: this.state.start ? moment(this.state.start).format('YYYY-MM-DD') : '',
+        end: this.state.end ? moment(this.state.end).format('YYYY-MM-DD') : '',
+      },
+    });
+  };
+
+  export = () => {
+    const { activityId, goodName, area, start, end } = this.state;
+    let cacheStart = start || '';
+    let cacheEnd = end || '';
+    window.location.href = `${api}/admin/activity/user/exportGlobal?activityId=${activityId}&goodName=${goodName}&area=${area}&start=${cacheStart}&end=${cacheEnd}`;
   };
 
   componentDidMount() {
@@ -22,45 +47,73 @@ class Index extends Component {
       type: 'bigWheel/fetchImei',
       payload: {},
     });
+    this.props.dispatch({
+      type: 'bigWheel/fetchGlobalOption',
+      payload: {},
+    });
   }
 
   columns = [{
     title: formatMessage({ id: 'custom.table.phone' }),
-    dataIndex: 'filename',
-    key: 'filename',
+    dataIndex: 'phone',
+    key: 'phone',
   }, {
     title: formatMessage({ id: 'custom.table.imei' }),
-    dataIndex: 'num',
-    key: 'num',
+    dataIndex: 'imei',
+    key: 'imei',
   }, {
     title: formatMessage({ id: 'custom.table.name' }),
     dataIndex: 'createtime',
     key: 'createtime',
   }, {
     title: formatMessage({ id: 'custom.table.address' }),
+    dataIndex: 'address',
+    key: 'address',
   }, {
     title: formatMessage({ id: 'custom.table.pin' }),
+    dataIndex: 'pinCode',
+    key: 'pinCode',
   }, {
     title: formatMessage({ id: 'custom.table.title' }),
+    dataIndex: 'title',
+    key: 'title',
   }, {
     title: formatMessage({ id: 'custom.table.award' }),
+    dataIndex: 'awardCode',
+    key: 'awardCode',
   }, {
     title: formatMessage({ id: 'custom.table.prize' }),
+    dataIndex: 'prizeName',
+    key: 'prizeName',
   }, {
     title: formatMessage({ id: 'custom.table.drawTime' }),
+    dataIndex: 'createtime',
+    key: 'createtime',
+    render: (text, record) => {
+      return moment(text).format('YYYY-MM-DD');
+    },
   }, {
     title: formatMessage({ id: 'custom.table.product' }),
+    dataIndex: 'goodName',
+    key: 'goodName',
   }, {
     title: formatMessage({ id: 'custom.table.area' }),
+    dataIndex: 'area',
+    key: 'area',
   }];
-  onChange = (value, dateString) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
+
+  onStartChange = (value) => {
+    this.setState({
+      start: value,
+    });
   };
 
-  onOk = (value) => {
-    console.log('onOk: ', value);
+  onEndChange = (value) => {
+    this.setState({
+      end: value,
+    });
   };
+
   delete = (id) => {
     this.props.dispatch({
       type: 'global/deleteGlobalImei',
@@ -80,6 +133,11 @@ class Index extends Component {
       type: 'bigWheel/fetchImei',
       payload: {
         page,
+        id: this.state.activityId,
+        goodName: this.state.goodName,
+        area: this.state.area,
+        start: this.state.start ? moment(this.state.start).format('YYYY-MM-DD') : '',
+        end: this.state.end ? moment(this.state.end).format('YYYY-MM-DD') : '',
       },
     });
   };
@@ -138,48 +196,77 @@ class Index extends Component {
     });
   };
 
+  mapActivityOption = () => {
+    return this.props.bigWheel.activityOption.map((value, index) => {
+      return <Option value={value.value} key={index}>{value.label}</Option>;
+    });
+  };
+
+  mapModalOption = () => {
+    return this.props.bigWheel.modalOption.map((value, index) => {
+      return <Option value={value} key={index}>{value}</Option>;
+    });
+  };
+
+  mapAreaOption = () => {
+    return this.props.bigWheel.areaOption.map((value, index) => {
+      return <Option value={value.value} key={index}>{value.label}</Option>;
+    });
+  };
+
+  fetchAreaOption = (value) => {
+    this.props.dispatch({
+      type: 'bigWheel/fetchAreaSelect',
+      payload: {
+        id: value,
+      },
+    });
+    this.setState({
+      activityId: value,
+    });
+  };
+
+
   render() {
     const { imeiList, imeiPage, imeiTotal } = this.props.bigWheel;
     return (
       <div>
         <div style={{ marginBottom: 20 }}>
           <span>{formatMessage({ id: 'custom.title' })}</span>
-          <Select defaultValue="lucy" style={{ width: 120, margin: '0 20px 0 10px' }}
+          <Select style={{ width: 120, margin: '0 20px 0 10px' }} onChange={this.fetchAreaOption}
                   placeholder={formatMessage({ id: 'custom.selectActivity' })}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="disabled" disabled>Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
+            {this.mapActivityOption()}
           </Select>
           <span>{formatMessage({ id: 'custom.productName' })}</span>
-          <Select defaultValue="lucy" style={{ width: 120, margin: '0 20px 0 10px' }}
+          <Select style={{ width: 120, margin: '0 20px 0 10px' }} onChange={_ => this.setState({ goodName: _ })}
                   placeholder={formatMessage({ id: 'custom.selectProduct' })}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="disabled" disabled>Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
+            {this.mapModalOption()}
           </Select>
           <span>{formatMessage({ id: 'custom.area' })}</span>
-          <Select defaultValue="lucy" style={{ width: 120, margin: '0 20px 0 10px' }}
+          <Select style={{ width: 120, margin: '0 20px 0 10px' }} onChange={_ => this.setState({ area: _ })}
                   placeholder={formatMessage({ id: 'custom.selectArea' })}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="disabled" disabled>Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
+            {this.mapAreaOption()}
           </Select>
           <span>{formatMessage({ id: 'custom.date' })}</span>
-          <RangePicker
-            showTime={{ format: 'HH:mm' }}
-            format="YYYY-MM-DD HH:mm"
-            placeholder={['Start Time', 'End Time']}
-            onChange={this.onChange}
-            onOk={this.onOk}
-            style={{ margin: '0 20px 0 10px' }}
+          <DatePicker
+            format="YYYY-MM-DD"
+            value={this.state.start}
+            placeholder="Start"
+            onChange={this.onStartChange}
+            style={{ margin: '0 20px' }}
           />
-          <Button style={{ float: 'right', marginLeft: 10 }}>{formatMessage({ id: 'custom.Export' })}</Button>
-          <Button type='primary' style={{ float: 'right' }}>{formatMessage({ id: 'custom.search' })}</Button>
+          <DatePicker
+            format="YYYY-MM-DD"
+            value={this.state.end}
+            placeholder="End"
+            onChange={this.onEndChange}
+          />
+          <Button style={{ float: 'right', marginLeft: 10 }}
+                  onClick={this.export}>{formatMessage({ id: 'custom.Export' })}</Button>
+          <Button type='primary' style={{ float: 'right' }}
+                  onClick={this.search}>{formatMessage({ id: 'custom.search' })}</Button>
         </div>
-        <Table dataSource={imeiList} columns={this.columns} rowKey='id' pagination={false}/>
+        <Table dataSource={imeiList} columns={this.columns} rowKey='imei' pagination={false}/>
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           <Pagination current={imeiPage} total={imeiTotal} onChange={this.pageChange}/>
         </div>

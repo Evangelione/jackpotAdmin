@@ -52,8 +52,8 @@ export function fetchActivityData(page, id, imei, phone, name, prize) {
   });
 }
 
-export function fetchImei(page) {
-  return request(`${api}/admin/imei/list?pageNum=${page}&pageSize=${PAGESIZE}`, {
+export function fetchImei(page, id, goodName, area, start, end) {
+  return request(`${api}/admin/activity/global/user?pageNum=${page}&pageSize=${PAGESIZE}&activityId=${id}&goodName=${goodName}&area=${area}&start=${start}&end=${end}`, {
     method: 'GET',
     credentials: 'omit',
     headers: {
@@ -158,7 +158,7 @@ export function upDateProbabilityNormal(id, count) {
 export function upDateIMei(id, type, file) {
   let formData = new FormData();
   formData.append('activityId', id);
-  formData.append('type', type);
+  formData.append('multiPhone', type);
   file && formData.append('file', file);
   return request(`${api}/admin/activity/imei`, {
     method: 'POST',
@@ -273,8 +273,38 @@ export function cancelRedeem(id) {
   });
 }
 
-export function fetchIMEIList(page) {
-  return request(`${api}/admin/activity/imei/list?pageNum=${page}&pageSize=${PAGESIZE}`, {
+export function fetchIMEIList(page, id) {
+  return request(`${api}/admin/imei/list?pageNum=${page}&pageSize=${PAGESIZE}&activityId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}
+
+export function fetchActivitySelect() {
+  return request(`${api}/admin/activity/select`, {
+    method: 'GET',
+    credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}
+
+export function fetchModalSelect() {
+  return request(`${api}/admin/imei/name/list`, {
+    method: 'GET',
+    credentials: 'omit',
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}
+
+export function fetchAreaSelect(id) {
+  return request(`${api}/admin/activity/area/select?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
     headers: {
