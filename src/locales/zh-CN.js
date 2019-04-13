@@ -43,7 +43,7 @@ export default {
   'setting.navBar.pageSetup.turntable.btn': '上传转盘',
   'setting.navBar.pageSetup.turntable.suggest': '建议尺寸：宽640像素，高度不限；留空即为默认图片',
   'setting.navBar.pageSetup.award': '活动说明',
-  'setting.navBar.pageSetup.prizeList': '活动说明',
+  'setting.navBar.pageSetup.prizeList': '商品列表',
   'setting.navBar.pageSetup.winnersList': '最新中奖名单',
   'setting.navBar.pageSetup.winnersList.place': '开启显示，关闭隐藏',
   'setting.navBar.pageSetup.save': '保存',

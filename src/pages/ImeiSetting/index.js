@@ -79,8 +79,8 @@ class Index extends Component {
     key: 'title',
   }, {
     title: formatMessage({ id: 'custom.table.award' }),
-    dataIndex: 'awardCode',
-    key: 'awardCode',
+    dataIndex: 'prizeTitle',
+    key: 'prizeTitle',
   }, {
     title: formatMessage({ id: 'custom.table.prize' }),
     dataIndex: 'prizeName',

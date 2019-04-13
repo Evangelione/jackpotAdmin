@@ -177,7 +177,6 @@ class ImeiSetting extends Component {
       fileList: [...this.state.fileList],
       onRemove: this.onRemove,
       beforeUpload: this.beforeUpload.bind(null, 'banner'),
-      loading: this.props.loading,
     };
     return (
       <Form {...formItemLayout}>
@@ -199,7 +198,7 @@ class ImeiSetting extends Component {
         >
           {getFieldDecorator('import')(
             <Upload {...props}>
-              <Button>
+              <Button loading={this.props.loading}>
                 <Icon type="upload"/> {formatMessage({ id: 'imei.import.btn' })}
               </Button>
             </Upload>,
