@@ -63,8 +63,8 @@ class Index extends Component {
     key: 'imei',
   }, {
     title: formatMessage({ id: 'custom.table.name' }),
-    dataIndex: 'createtime',
-    key: 'createtime',
+    dataIndex: 'name',
+    key: 'name',
   }, {
     title: formatMessage({ id: 'custom.table.address' }),
     dataIndex: 'address',
@@ -89,9 +89,6 @@ class Index extends Component {
     title: formatMessage({ id: 'custom.table.drawTime' }),
     dataIndex: 'createtime',
     key: 'createtime',
-    render: (text, record) => {
-      return moment(text).format('YYYY-MM-DD');
-    },
   }, {
     title: formatMessage({ id: 'custom.table.product' }),
     dataIndex: 'goodName',
