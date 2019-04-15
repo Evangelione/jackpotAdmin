@@ -223,6 +223,18 @@ class Index extends Component {
     });
   };
 
+  fetchModalOption = (value) => {
+    this.props.dispatch({
+      type: 'bigWheel/fetchModalSelect',
+      payload: {
+        id: value,
+      },
+    });
+    this.setState({
+      goodName: value,
+    });
+  };
+
 
   render() {
     const { imeiList, imeiPage, imeiTotal } = this.props.bigWheel;
@@ -235,7 +247,7 @@ class Index extends Component {
             {this.mapActivityOption()}
           </Select>
           <span>{formatMessage({ id: 'custom.productName' })}</span>
-          <Select style={{ width: 120, margin: '0 20px 0 10px' }} onChange={_ => this.setState({ goodName: _ })}
+          <Select style={{ width: 120, margin: '0 20px 0 10px' }} onChange={this.fetchModalOption}
                   placeholder={formatMessage({ id: 'custom.selectProduct' })}>
             {this.mapModalOption()}
           </Select>

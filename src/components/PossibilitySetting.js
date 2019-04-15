@@ -28,7 +28,9 @@ class PossibilitySetting extends Component {
     });
     this.props.dispatch({
       type: 'bigWheel/fetchPhoneModal',
-      payload: {},
+      payload: {
+        id: this.props.id,
+      },
     });
     if (this.props.detail.type === 1) {
       this.setState({
@@ -79,13 +81,13 @@ class PossibilitySetting extends Component {
         return false;
       }
       if (result.some((v, i) => {
-          if (value.name === result[i][0].name) {
-            result[i].push(value);
-            return true;
-          } else {
-            return false;
-          }
-        })) {
+        if (value.name === result[i][0].name) {
+          result[i].push(value);
+          return true;
+        } else {
+          return false;
+        }
+      })) {
       } else {
         result.push([value]);
 
@@ -232,8 +234,10 @@ class PossibilitySetting extends Component {
         </div>
         {radio === 0 ?
           <div>
-            <Button type='primary' onClick={this.addPhone} style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.addModel' })}</Button>
-            <Button type='primary' onClick={this.deletePhone} style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.delModel' })}</Button>
+            <Button type='primary' onClick={this.addPhone}
+                    style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.addModel' })}</Button>
+            <Button type='primary' onClick={this.deletePhone}
+                    style={{ margin: '20px 10px' }}>{formatMessage({ id: 'pro.delModel' })}</Button>
             {this.mapPhone()}
           </div>
           :

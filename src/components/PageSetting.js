@@ -239,6 +239,7 @@ class PageSetting extends Component {
               beforeUpload={this.beforeUpload.bind(null, 'banner')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.kv.btn"/>
+                &nbsp;&nbsp;&nbsp;(750 * 690)
               </Button>
             </Upload>,
           )}
@@ -255,6 +256,7 @@ class PageSetting extends Component {
               beforeUpload={this.beforeUpload.bind(null, 'background')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.bg.btn"/>
+                &nbsp;&nbsp;&nbsp;(750 * 2300)
               </Button>
             </Upload>,
           )}
@@ -271,6 +273,7 @@ class PageSetting extends Component {
               beforeUpload={this.beforeUpload.bind(null, 'ad')}>
               <Button>
                 <Icon type="upload"/> <FormattedMessage id="setting.navBar.pageSetup.banner.btn"/>
+                &nbsp;&nbsp;&nbsp;(400 * 520)
               </Button>
             </Upload>,
           )}

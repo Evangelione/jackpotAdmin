@@ -47,8 +47,8 @@ class ActivityData extends Component {
     key: 'address',
   }, {
     title: <FormattedMessage id="activity.data.table.pin"/>,
-    dataIndex: 'pin',
-    key: 'pin',
+    dataIndex: 'pinCode',
+    key: 'pinCode',
   }, {
     title: <FormattedMessage id="activity.data.table.award"/>,
     render: (text, record) => {

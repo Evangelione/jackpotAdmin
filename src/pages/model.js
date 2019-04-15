@@ -154,8 +154,8 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchPhoneModal({ payload }, { call, put }) {
-      const { data } = yield call(services.fetchPhoneModal);
+    * fetchPhoneModal({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchPhoneModal, id);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -238,19 +238,29 @@ export default {
         :
         message.error(data.msg);
     },
-    * fetchGlobalOption({ payload }, { call, put }) {
-      const data1 = yield call(services.fetchActivitySelect);
-      const data2 = yield call(services.fetchModalSelect);
-      parseInt(data1.data.code, 10) === 1 ?
+    * fetchGlobalOption({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchActivitySelect);
+      parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
           payload: {
-            activityOption: data1.data.data,
-            modalOption: data2.data.data,
+            activityOption: data.data,
           },
         })
         :
-        message.error(data1.data.msg);
+        message.error(data.msg);
+    },
+    * fetchModalSelect({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchModalSelect, id);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            modalOption: data.data,
+          },
+        })
+        :
+        message.error(data.msg);
     },
     * fetchAreaSelect({ payload: { id } }, { call, put }) {
       const { data } = yield call(services.fetchAreaSelect, id);

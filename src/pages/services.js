@@ -180,8 +180,8 @@ export function fetchPrizeList(id) {
   });
 }
 
-export function fetchPhoneModal() {
-  return request(`${api}/admin/imei/name/list`, {
+export function fetchPhoneModal(id) {
+  return request(`${api}/admin/imei/name/list?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
     headers: {
@@ -293,8 +293,8 @@ export function fetchActivitySelect() {
   });
 }
 
-export function fetchModalSelect() {
-  return request(`${api}/admin/imei/name/list`, {
+export function fetchModalSelect(id) {
+  return request(`${api}/admin/imei/name/list?activityId=${id}`, {
     method: 'GET',
     credentials: 'omit',
     headers: {
