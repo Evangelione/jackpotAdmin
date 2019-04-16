@@ -100,6 +100,7 @@ export default {
   'custom.table.drawTime': 'the drawing time',
   'custom.table.product': 'product name',
   'custom.table.area': 'area',
+  'index.logout': 'logout',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

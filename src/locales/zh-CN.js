@@ -101,6 +101,7 @@ export default {
   'custom.table.drawTime': '抽奖时间',
   'custom.table.product': '商品名称（机型）',
   'custom.table.area': '区域',
+  'index.logout': '退出登录',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

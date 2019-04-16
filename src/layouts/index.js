@@ -91,7 +91,7 @@ class BasicLayout extends Component {
           </Sider>
           <Layout>
             <Header style={{ background: '#fff', padding: 0, textAlign: 'right' }}>
-              <div style={{ display: 'inline-block', marginRight: 15, cursor: 'pointer' }} onClick={this.logout}>退出登录
+              <div style={{ display: 'inline-block', marginRight: 15, cursor: 'pointer' }} onClick={this.logout}><FormattedMessage id="index.logout"/>
               </div>
               <SelectLang/>
             </Header>

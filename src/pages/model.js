@@ -106,6 +106,18 @@ export default {
         :
         message.error(probabilityDetail.msg);
     },
+    * fetchprobabilityDetail({ payload: { id } }, { call, put }) {
+      const { data } = yield call(services.fetchprobabilityDetail, id);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            probabilityDetail: data.data,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
     * upDatePageSetup({ payload: { form } }, { call, put }) {
       const { data } = yield call(services.upDatePageSetup, form);
       parseInt(data.code, 10) === 1 ?

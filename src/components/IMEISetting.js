@@ -87,6 +87,12 @@ class ImeiSetting extends Component {
               id: this.props.id,
             },
           });
+          this.props.dispatch({
+            type: 'bigWheel/fetchPhoneModal',
+            payload: {
+              id: this.props.id,
+            },
+          });
         });
       },
     });
@@ -109,6 +115,12 @@ class ImeiSetting extends Component {
     }).then(() => {
       this.props.dispatch({
         type: 'bigWheel/fetchIMEIList',
+        payload: {
+          id: this.props.id,
+        },
+      });
+      this.props.dispatch({
+        type: 'bigWheel/fetchPhoneModal',
         payload: {
           id: this.props.id,
         },
