@@ -101,6 +101,8 @@ export default {
   'custom.table.product': 'product name',
   'custom.table.area': 'area',
   'index.logout': 'logout',
+  'login.title': 'Vivo lottery system',
+  'login.btn': 'login',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

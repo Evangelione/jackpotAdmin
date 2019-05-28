@@ -43,3 +43,17 @@ export function updateUser({ name, username, password, auth, id }) {
     },
   });
 }
+
+
+export function deleteAdmin(id) {
+  let formData = new FormData();
+  formData.append('id', id);
+  return request(`${api}/admin/user/delete`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+    headers: {
+      token: localStorage.getItem('tokenAdmin'),
+    },
+  });
+}

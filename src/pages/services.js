@@ -159,7 +159,7 @@ export function upDateIMei(id, type, file) {
   let formData = new FormData();
   formData.append('activityId', id);
   formData.append('multiPhone', type);
-  file && formData.append('file', file);
+  formData.append('file', file);
   return request(`${api}/admin/activity/imei`, {
     method: 'POST',
     credentials: 'omit',

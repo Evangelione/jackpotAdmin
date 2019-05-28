@@ -77,8 +77,8 @@ class SingleModel extends Component {
       };
     });
   };
-  mapPhoneModalList = (filteredOptions) => {
-    return filteredOptions.map(((value, index) => {
+  mapPhoneModalList = () => {
+    return this.props.phoneModalList.map(((value, index) => {
       return <Option value={value} key={index}>{value}</Option>;
     }));
   };
@@ -120,7 +120,7 @@ class SingleModel extends Component {
 
   render() {
     const { selectedItems } = this.state;
-    const filteredOptions = this.props.phoneModalList.filter(o => !selectedItems.includes(o));
+    // const filteredOptions = this.props.phoneModalList.filter(o => !selectedItems.includes(o));
     const { getFieldDecorator } = this.props.form;
     return (
       <Form {...formItemLayout}>
@@ -133,7 +133,7 @@ class SingleModel extends Component {
           })(
             <Select placeholder="Please select a phone modal"
                     onChange={this.handleChange}>
-              {this.mapPhoneModalList(filteredOptions)}
+              {this.mapPhoneModalList()}
             </Select>,
           )}
         </Form.Item>

@@ -8,6 +8,7 @@ export default {
   'administrator.list.table.administrator': '管理员',
   'administrator.list.table.creationTime': '创建时间',
   'administrator.list.table.edit': '编辑',
+  'administrator.list.table.delete': '删除',
   'administrator.list.table.password': '密码',
   'administrator.list.table.confirmPassword': '确认密码',
   'administrator.list.modal.name.place': '请输入姓名',

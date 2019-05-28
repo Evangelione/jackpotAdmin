@@ -8,6 +8,7 @@ export default {
   'administrator.list.table.administrator': 'administrator',
   'administrator.list.table.creationTime': 'creation time',
   'administrator.list.table.edit': 'edit',
+  'administrator.list.table.delete': 'delete',
   'administrator.list.table.password': 'password',
   'administrator.list.table.confirmPassword': 'confirmPassword',
   'administrator.list.modal.name.place': 'Please enter your full name',

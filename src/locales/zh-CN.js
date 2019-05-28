@@ -102,6 +102,8 @@ export default {
   'custom.table.product': '商品名称（机型）',
   'custom.table.area': '区域',
   'index.logout': '退出登录',
+  'login.title': 'Vivo抽奖系统',
+  'login.btn': '登录',
   ...bigWheel,
   ...soduku,
   ...goldenEggs,

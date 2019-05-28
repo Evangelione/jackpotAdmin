@@ -7,7 +7,7 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'jackpotAdmin',
+      title: 'vivo-lottery',
       dll: true,
       locale: {
         enable: true,

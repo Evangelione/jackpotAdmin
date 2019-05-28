@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Pagination } from 'antd';
+import { Button, Input, Table, Pagination, Modal } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import OperatorModal from './components/OperatorModal';
 import { connect } from 'dva';
 
 const { Search } = Input;
+const confirm = Modal.confirm;
 
 @connect(({ administrator }) => ({
   administrator,
@@ -41,11 +42,16 @@ class Index extends Component {
   }, {
     title: <FormattedMessage id="administrator.list.table.edit"/>,
     render: (text, record) => {
-      return <OperatorModal modify={record}>
-        <Button type='primary'>
-          {formatMessage({ id: 'administrator.list.table.edit' })}
-        </Button>
-      </OperatorModal>;
+      return <>
+        <OperatorModal modify={record}>
+          <Button type='primary'>
+            {formatMessage({ id: 'administrator.list.table.edit' })}
+          </Button>
+        </OperatorModal>
+          <Button type='danger' onClick={this.danger.bind(null, record.id)} style={{marginLeft: 10}}>
+            {formatMessage({ id: 'administrator.list.table.delete' })}
+          </Button>
+      </>;
     },
   }];
 
@@ -55,6 +61,26 @@ class Index extends Component {
       payload: {},
     });
   }
+
+  danger = (id) => {
+    confirm({
+      title: formatMessage({ id: 'modal.delete.title' }),
+      content: formatMessage({ id: 'modal.delete.confirm' }),
+      onOk: () => {
+        this.props.dispatch({
+          type: 'administrator/deleteAdmin',
+          payload: {
+            id,
+          },
+        }).then(() => {
+          this.props.dispatch({
+            type: 'administrator/fetchUserList',
+            payload: {},
+          });
+        });
+      },
+    });
+  };
 
   userListPageChange = (page) => {
     this.props.dispatch({
