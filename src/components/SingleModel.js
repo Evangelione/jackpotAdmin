@@ -131,8 +131,7 @@ class SingleModel extends Component {
             ...strConfig,
             initialValue: selectedItems,
           })(
-            <Select placeholder="Please select a phone modal"
-                    onChange={this.handleChange}>
+            <Select onChange={this.handleChange}>
               {this.mapPhoneModalList()}
             </Select>,
           )}

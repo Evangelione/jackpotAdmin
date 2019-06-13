@@ -260,14 +260,14 @@ class Index extends Component {
           <DatePicker
             format="YYYY-MM-DD"
             value={this.state.start}
-            placeholder="Start"
+            placeholder={formatMessage({ id: 'setting.navBar.pageSetup.start' })}
             onChange={this.onStartChange}
             style={{ margin: '0 20px' }}
           />
           <DatePicker
             format="YYYY-MM-DD"
             value={this.state.end}
-            placeholder="End"
+            placeholder={formatMessage({ id: 'setting.navBar.pageSetup.end' })}
             onChange={this.onEndChange}
           />
           <Button style={{ float: 'right', marginLeft: 10 }}

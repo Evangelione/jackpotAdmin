@@ -207,8 +207,7 @@ class SingleItem extends Component {
           {getFieldDecorator('description', {
             ...strConfig,
           })(
-            <TextArea placeholder="Autosize height with minimum and maximum number of lines"
-                      autosize={{ minRows: 4 }}/>,
+            <TextArea autosize={{ minRows: 4 }}/>,
           )}
         </Form.Item>
         <Form.Item

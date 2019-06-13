@@ -72,7 +72,7 @@ class PrizeSetting extends Component {
       <div>
         <span style={{ margin: '20px 10px 20px 70px', fontSize: 16, color: 'rgba(0, 0, 0, 0.85)' }}>
           {formatMessage({ id: 'prize.num' })}：</span>
-        <Select placeholder="Please select a country" value={this.state.prizeQuantity} onChange={this.changeQuantity}
+        <Select value={this.state.prizeQuantity} onChange={this.changeQuantity}
                 style={{ width: 200 }}>
           <Option value="1">1</Option>
           <Option value="2">2</Option>
