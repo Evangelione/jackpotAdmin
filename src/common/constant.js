@@ -12,5 +12,5 @@ export const formItemLayout = {
 export const PAGESIZE = 10;
 
 // export const api = 'http://192.168.0.101:8000';
-export const api = 'http://149.129.174.149:8000';
+export const api = 'http://147.139.4.40:8000';
 // export const api = 'http://118.31.46.146:8000';
